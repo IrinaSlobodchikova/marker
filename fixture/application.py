@@ -6,7 +6,7 @@ class Application:
 
     def __init__(self, browser, base_url):
         if browser == "firefox":
-            self.wd = webdriver.Firefox(capabilities={"marionette": False})
+            self.wd = webdriver.Firefox()
         elif browser == "chrome":
             self.wd = webdriver.Chrome()
         elif browser == "ie":
@@ -15,9 +15,9 @@ class Application:
             self.wd = webdriver.Edge()
         else:
             raise ValueError("Unrecognized browser %s" % browser)
-        self.wd.implicitly_wait(5)
         self.session = SessionHelper(self)
         self.base_url = base_url
+        self.wd.implicitly_wait(10)
 
     def is_valid(self):
         try:
