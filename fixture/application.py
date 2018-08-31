@@ -17,7 +17,7 @@ class Application:
             raise ValueError("Unrecognized browser %s" % browser)
         self.session = SessionHelper(self)
         self.base_url = base_url
-        self.wd.implicitly_wait(10)
+        self.wd.implicitly_wait(5)
 
     def is_valid(self):
         try:
