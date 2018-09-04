@@ -1,6 +1,6 @@
 from selenium import webdriver
-from fixture.session import SessionHelperMarker
-from fixture.session import SessionHelperSM
+from fixture.session import SessionHelper
+
 
 
 class Application:
@@ -16,8 +16,7 @@ class Application:
             self.wd = webdriver.Edge()
         else:
             raise ValueError("Unrecognized browser %s" % browser)
-        self.session = SessionHelperMarker(self)
-        self.sessionSM = SessionHelperSM(self)
+        self.session = SessionHelper(self)
         self.config = config
         self.environment = environment
         self.baseUrlMarker = baseUrlMarker

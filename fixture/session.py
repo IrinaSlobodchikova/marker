@@ -1,7 +1,7 @@
 
 
 
-class SessionHelperMarker:
+class SessionHelper:
 
     def __init__(self, app):
         self.app = app
@@ -52,10 +52,6 @@ class SessionHelperMarker:
                 self.Marker_logout()
         self.Marker_login(username, password)
 
-class SessionHelperSM:
-
-    def __init__(self, app):
-        self.app = app
 
     def sm_login(self, username, password):
         wd = self.app.wd
@@ -89,7 +85,7 @@ class SessionHelperSM:
 
     def get_logged_user_sm(self):
         wd = self.app.wd
-        text = wd.find_element_by_xpath("//div[30]/header/div[2]/div/a[1]/span").text
+        text = wd.find_element_by_css_selector("span.hdr_user-menu_name").text
         return text
 
     def ensure_login_sm(self, username, password):
@@ -100,3 +96,10 @@ class SessionHelperSM:
             else:
                 self.sm_logout()
         self.sm_login(username, password)
+
+    def is_marker(self):
+        try:
+            self.app.wd.current_url.startswith(self.app.baseUrlSM)
+            return True
+        except:
+            return False

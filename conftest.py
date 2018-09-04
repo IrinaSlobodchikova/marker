@@ -50,7 +50,10 @@ def app(request, config):
 @pytest.fixture(scope="session", autouse=True)
 def stop(request):
     def fin():
-        fixture.session.ensure_Marker_logout()
+        if not fixture.session.is_marker:
+            fixture.session.ensure_Marker_logout()
+        else:
+            fixture.session.ensure_logout_sm()
         fixture.destroy()
 
     request.addfinalizer(fin)
