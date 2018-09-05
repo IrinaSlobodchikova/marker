@@ -67,7 +67,11 @@ class SessionHelper:
 
     def sm_logout(self):
         wd = self.app.wd
-        wd.find_element_by_css_selector("a.icon-logout").click()
+        baseUrlSM = self.app.baseUrlSM
+        #wd.maximize_window()
+        #wd.find_element_by_link_text("Выход из системы").click()
+        #wd.find_element_by_css_selector("a.icon-logout").click()
+        wd.get(baseUrlSM + 'Auth/Logout')
 
 
     def ensure_logout_sm(self):
@@ -85,8 +89,8 @@ class SessionHelper:
 
     def get_logged_user_sm(self):
         wd = self.app.wd
-        text = wd.find_element_by_css_selector("span.hdr_user-menu_name").text
-        return text
+        text1 = wd.find_element_by_css_selector("span.hdr_user-menu_name").get_attribute("textContent")
+        return text1
 
     def ensure_login_sm(self, username, password):
         wd = self.app.wd
