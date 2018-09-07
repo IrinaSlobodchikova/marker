@@ -68,10 +68,9 @@ class SessionHelper:
     def sm_logout(self):
         wd = self.app.wd
         baseUrlSM = self.app.baseUrlSM
+        smlogout = self.app.smlogout
         #wd.maximize_window()
-        #wd.find_element_by_link_text("Выход из системы").click()
-        #wd.find_element_by_css_selector("a.icon-logout").click()
-        wd.get(baseUrlSM + 'Auth/Logout')
+        wd.get(baseUrlSM + smlogout)
 
 
     def ensure_logout_sm(self):
@@ -100,6 +99,11 @@ class SessionHelper:
             else:
                 self.sm_logout()
         self.sm_login(username, password)
+
+    def open_SM_page(self, page):
+        wd = self.app.wd
+        baseUrlSM = self.app.baseUrlSM
+        wd.get(baseUrlSM + page)
 
     def is_marker(self):
         try:

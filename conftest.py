@@ -29,10 +29,35 @@ def app(request, config):
     #web_config = load_config(request.config.getoption("--target"))['dev_marker']
     if fixture is None or not fixture.is_valid():
         fixture = Application(browser=browser, config=config, environment=environment,
-                              baseUrlMarker=config[environment]['baseUrlMarker'],
                               baseUrlSM=config[environment]['baseUrlSM'],
+                              baseUrlMarker=config[environment]['baseUrlMarker'],
                               username=config[environment]['username'],
-                              password=config[environment]['password'])
+                              password=config[environment]['password'],
+                              dashboard=config['markertails']['dashboard'],
+                              newtenders=config['markertails']['newtenders'],
+                              participation=config['markertails']['participation'],
+                              watch=config['markertails']['watch'],
+                              market_potential=config['markertails']['market-potential'],
+                              planned_purchases=config['markertails']['planned-purchases'],
+                              company_list=config['markertails']['company_list'],
+                              solutions=config['markertails']['solutions'],
+                              reports=config['markertails']['reports'],
+                              smParticipants=config['SMtails']['Participants'],
+                              smParticipantsCustomers=config['SMtails']['ParticipantsCustomers'],
+                              smParticipantsSuppliers=config['SMtails']['ParticipantsSuppliers'],
+                              smPurchases=config['SMtails']['Purchases'],
+                              smPrices=config['SMtails']['Prices'],
+                              smCertificates=config['SMtails']['Certificates'],
+                              smLicences=config['SMtails']['Licences'],
+                              smKontrol=config['SMtails']['Kontrol'],
+                              smreports=config['SMtails']['reports'],
+                              smMonitorinds=config['SMtails']['Monitorinds'],
+                              smcompany_list=config['SMtails']['company_list'],
+                              smPurchases_list=config['SMtails']['Purchases_list'],
+                              smNmckList=config['SMtails']['NmckList'],
+                              smUser_History=config['SMtails']['User_History'],
+                              smlogout=config['SMtails']['logout']
+        )
     #fixture.session.ensure_login(username=web_config['username'], password=web_config['password'])
     return fixture
 
@@ -68,5 +93,5 @@ def stop(request):
 def pytest_addoption(parser):
     parser.addoption("--browser", action="store", default="chrome")
     parser.addoption("--target", action="store", default="target.json")
-    parser.addoption("--environment", action="store", default="dev")
+    parser.addoption("--environment", action="store", default="test")
     # parser.addoption("--check_ui", action="store_true")
