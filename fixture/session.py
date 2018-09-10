@@ -1,4 +1,7 @@
-
+from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
 
 
 class SessionHelper:
@@ -111,3 +114,14 @@ class SessionHelper:
             return True
         except:
             return False
+
+    def is_sm_blocked(self):
+        try:
+            text = self.app.wd.find_element_by_id("smBlock").value_of_css_property("display")
+            if text == 'block':
+             return True
+        except:
+            return False
+
+
+

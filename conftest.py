@@ -93,5 +93,5 @@ def stop(request):
 def pytest_addoption(parser):
     parser.addoption("--browser", action="store", default="chrome")
     parser.addoption("--target", action="store", default="target.json")
-    parser.addoption("--environment", action="store", default="test")
+    parser.addoption("--environment", action="store", default="dev")
     # parser.addoption("--check_ui", action="store_true")

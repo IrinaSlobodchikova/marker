@@ -1,5 +1,5 @@
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+
+
 
 
 
@@ -15,9 +15,7 @@ class testHelperSM:
 
     def find_region2(self):
         wd = self.app.wd
-        if wd.find_element_by_id("smBlock").get_attribute("display") == 'block':
-            wait = WebDriverWait(wd, 10)  # seconds
-            wait.until(not(EC.visibility_of(wd.find_element_by_id("smBlock"))))
+        self.app.wait_smBlock(10)
         wd.find_element_by_xpath("//div[@id='aggregatesPlaceholder']/table/tbody/tr/td[2]/div/div/div[1]/span[2]").click()
         wd.find_element_by_xpath("//div[@id='mCSB_6_container']/div/ul/li[20]/label").click()
         wd.find_element_by_id("aggSearchText").click()
@@ -29,7 +27,10 @@ class testHelperSM:
         wd.find_element_by_xpath("//div[@id='mCSB_7_container']/div/ul/li[6]/label").click()
         wd.find_element_by_xpath("//div[@id='mCSB_7_container']/div/ul/li[7]/label").click()
         wd.find_element_by_xpath("//div[@id='mainAggDlgContent']//button[.='Применить фильтр']").click()
+        self.app.wait_smBlock(10)
         wd.find_element_by_xpath("//form[@id='frmSearch']//button[.='Поиск']").click()
+
+
 
 
     def check_results(self):
@@ -53,8 +54,7 @@ class testHelperSM:
     def create_contact_report_all_in_dif_row_tel_mail(self):
         wd = self.app.wd
         wd.maximize_window()
-        wait = WebDriverWait(wd, 5)
-        wait.until(EC.visibility_of("//div[@class='panel_header']//p[.='Контакты']"))
+        self.app.wait_smBlock(10)
         wd.find_element_by_xpath("//div[@class='panel_header']//p[.='Контакты']").click()
         wd.find_element_by_xpath("//label[@for='cb-3']").click()
         if not wd.find_element_by_id("cb-3").is_selected():
@@ -63,7 +63,7 @@ class testHelperSM:
 
     def create_contact_report_allinone_tel_mail(self):
         wd = self.app.wd
-        wait.until(EC.visibility_of(wd.find_element_by_xpath("//form[@id='frmSearch']//button[.='Поиск']")))
+        self.app.wait_smBlock(10)
         wd.find_element_by_xpath("//div[@class='panel_header']//p[.='Контакты']").click()
         wd.find_element_by_xpath("//label[@for='cb-11']").click()
         if not wd.find_element_by_id("cb-11").is_selected():

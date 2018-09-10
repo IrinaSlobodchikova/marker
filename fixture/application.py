@@ -2,6 +2,9 @@ from selenium import webdriver
 from fixture.session import SessionHelper
 from fixture.testhelpermarker import testHelperMarker
 from fixture.testhelpersm import testHelperSM
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
 
 
 class Application:
@@ -12,13 +15,13 @@ class Application:
                  smCertificates, smLicences, smKontrol, smreports, smMonitorinds, smcompany_list, smPurchases_list,
                  smNmckList, smUser_History, smlogout):
         if browser == "firefox":
-            self.wd = webdriver.Firefox()
+            self.wd = webdriver.Firefox(firefox_binary="C:\\Program Files\\Mozilla Firefox\\firefox.exe")
         elif browser == "chrome":
             self.wd = webdriver.Chrome()
         elif browser == "ie":
-            self.wd = webdriver.Ie()
+            self.wd = webdriver.Ie(capabilities={"requireWindowFocus": True})
         elif browser == "edge":
-            self.wd = webdriver.Edge()
+            self.wd = webdriver.Edge(capabilities={"requireWindowFocus": True})
         else:
             raise ValueError("Unrecognized browser %s" % browser)
         self.session = SessionHelper(self)
@@ -79,8 +82,17 @@ class Application:
     #    if  not (wd.current_url.endswith("addressbook/") and len(wd.find_elements_by_name("add")) > 0):
     #        wd.find_element_by_link_text("home").click()
 
+    def wait_smBlock(self, timeout):
+        wd = self.wd
+        if self.session.is_sm_blocked():
+            # text = self.app.wd.find_element_by_id("smBlock").value_of_css_property("display")
+            wait = WebDriverWait(wd, timeout)  # seconds
+            wait.until(EC.invisibility_of_element((By.ID, "smBlock")))
 
 
 
     def destroy(self):
         self.wd.quit()
+
+
+
