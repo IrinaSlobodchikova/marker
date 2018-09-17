@@ -21,7 +21,7 @@ class Application:
         elif browser == "ie":
             self.wd = webdriver.Ie(capabilities={"requireWindowFocus": True})
         elif browser == "edge":
-            self.wd = webdriver.Edge(capabilities={"requireWindowFocus": True})
+            self.wd = webdriver.Edge()
         else:
             raise ValueError("Unrecognized browser %s" % browser)
         self.session = SessionHelper(self)
@@ -76,6 +76,8 @@ class Application:
     def open_sm_home_page(self):
         wd = self.wd
         wd.get(self.baseUrlSM)
+        self.wait_smBlock(5)
+
 
     #def return_to_home_page(self):
     #    wd = self.wd

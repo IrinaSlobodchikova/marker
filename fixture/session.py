@@ -60,6 +60,7 @@ class SessionHelper:
         wd = self.app.wd
         self.app.open_sm_home_page()
         wd.find_element_by_css_selector("a.button.login").click()
+        #if not self.is_logged_in_sm():
         wd.find_element_by_name("UserName").click()
         wd.find_element_by_name("UserName").clear()
         wd.find_element_by_name("UserName").send_keys(username)
@@ -67,6 +68,7 @@ class SessionHelper:
         wd.find_element_by_name("Password").clear()
         wd.find_element_by_name("Password").send_keys(password)
         wd.find_element_by_xpath("//form[@id='form-login']//button[.='Войти']").click()
+
 
     def sm_logout(self):
         wd = self.app.wd
@@ -107,6 +109,7 @@ class SessionHelper:
         wd = self.app.wd
         baseUrlSM = self.app.baseUrlSM
         wd.get(baseUrlSM + page)
+        self.app.wait_smBlock(5)
 
     def is_marker(self):
         try:

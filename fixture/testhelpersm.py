@@ -15,7 +15,7 @@ class testHelperSM:
 
     def find_region2(self):
         wd = self.app.wd
-        self.app.wait_smBlock(10)
+        self.app.wait_smBlock(20)
         wd.find_element_by_xpath("//div[@id='aggregatesPlaceholder']/table/tbody/tr/td[2]/div/div/div[1]/span[2]").click()
         wd.find_element_by_xpath("//div[@id='mCSB_6_container']/div/ul/li[20]/label").click()
         wd.find_element_by_id("aggSearchText").click()
@@ -27,7 +27,7 @@ class testHelperSM:
         wd.find_element_by_xpath("//div[@id='mCSB_7_container']/div/ul/li[6]/label").click()
         wd.find_element_by_xpath("//div[@id='mCSB_7_container']/div/ul/li[7]/label").click()
         wd.find_element_by_xpath("//div[@id='mainAggDlgContent']//button[.='Применить фильтр']").click()
-        self.app.wait_smBlock(10)
+        self.app.wait_smBlock(20)
         wd.find_element_by_xpath("//form[@id='frmSearch']//button[.='Поиск']").click()
 
 
@@ -54,8 +54,9 @@ class testHelperSM:
     def create_contact_report_all_in_dif_row_tel_mail(self):
         wd = self.app.wd
         wd.maximize_window()
-        self.app.wait_smBlock(10)
+        self.app.wait_smBlock(20)
         wd.find_element_by_xpath("//div[@class='panel_header']//p[.='Контакты']").click()
+        #self.app.wait_smBlock(10)
         wd.find_element_by_xpath("//label[@for='cb-3']").click()
         if not wd.find_element_by_id("cb-3").is_selected():
             wd.find_element_by_id("cb-3").click()
@@ -63,29 +64,32 @@ class testHelperSM:
 
     def create_contact_report_allinone_tel_mail(self):
         wd = self.app.wd
-        self.app.wait_smBlock(10)
+        self.app.wait_smBlock(20)
         wd.find_element_by_xpath("//div[@class='panel_header']//p[.='Контакты']").click()
-        wd.find_element_by_xpath("//label[@for='cb-11']").click()
-        if not wd.find_element_by_id("cb-11").is_selected():
-            wd.find_element_by_id("cb-11").click()
-        wd.find_element_by_xpath("//label[@for='rb-9']").click()
-        if not wd.find_element_by_id("rb-9").is_selected():
-            wd.find_element_by_id("rb-9").click()
+        #self.app.wait_smBlock(5)
+        wd.find_element_by_xpath("//label[@for='cb-3']").click()
+        if not wd.find_element_by_id("cb-3").is_selected():
+            wd.find_element_by_id("cb-3").click()
+        #Найти как кликнуть rb-1
+        wd.find_element_by_id("rb-1").click()
         wd.find_element_by_xpath("//div[@id='divReportContactsSettings']//button[.='Сформировать']").click()
 
     def create_contact_report_result(self):
         wd = self.app.wd
+        self.app.wait_smBlock(20)
         wd.find_element_by_xpath("//div[@class='panel_header']//p[.='Результаты']").click()
         wd.find_element_by_xpath("//div[@id='divReportSearchResultsSettings']//button[.='Сформировать']").click()
 
     def create_contact_report_statictic(self):
         wd = self.app.wd
         #добавить выбор чекбоксов
+        self.app.wait_smBlock(20)
         wd.find_element_by_xpath("//div[@class='panel_header']//p[.='Статистика']").click()
         wd.find_element_by_xpath("//div[@id='divReportStatisticsSettings']//button[.='Сформировать']").click()
 
     def create_contact_list(self):
         wd = self.app.wd
+        self.app.wait_smBlock(20)
         wd.find_element_by_xpath("//li[@id='UpdateList']//p[.='Добавить']").click()
         wd.find_element_by_xpath("//input[@class='ui-autocomplete-input']").click()
         wd.find_element_by_xpath("//input[@class='ui-autocomplete-input']").clear()
