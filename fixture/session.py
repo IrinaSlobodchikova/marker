@@ -127,4 +127,10 @@ class SessionHelper:
             return False
 
 
-
+    def is_sm_artef_blocked(self):
+        try:
+            text = self.app.wd.find_element_by_css_selector("div.dlg-content_loader.dlg-content_loader--center").value_of_css_property("display")
+            if text == 'block':
+             return True
+        except:
+            return False

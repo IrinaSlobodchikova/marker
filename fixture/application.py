@@ -91,6 +91,12 @@ class Application:
             wait = WebDriverWait(wd, timeout)  # seconds
             wait.until(EC.invisibility_of_element((By.ID, "smBlock")))
 
+    def wait_sm_artefact_Block(self, timeout):
+        wd = self.wd
+        if self.session.is_sm_artef_blocked():
+            # text = self.app.wd.find_element_by_id("smBlock").value_of_css_property("display")
+            wait = WebDriverWait(wd, timeout)  # seconds
+            wait.until(EC.invisibility_of_element((By.CSS_SELECTOR, "div.dlg-content_loader.dlg-content_loader--center")))
 
 
     def destroy(self):
