@@ -98,6 +98,27 @@ class Application:
             wait = WebDriverWait(wd, timeout)  # seconds
             wait.until(EC.invisibility_of_element((By.CSS_SELECTOR, "div.dlg-content_loader.dlg-content_loader--center")))
 
+    def status_is_changed(self, state_ex, timeout):
+        wd = self.wd
+        state = wd.find_element_by_xpath("//div[@id='reports']/div[3]/table/tbody/tr[1]/td[5]").text
+        if state == state_ex:
+            wait = WebDriverWait(wd, timeout)  # seconds
+            wait.until(EC.text_to_be_present_in_element((By.XPATH, "//div[@id='reports']/div[3]/table/tbody/tr[1]/td[5]"), "Создан"))
+        else:
+            return state
+
+    def banner_link_button(self, timeout):
+        wd = self.wd
+        wait = WebDriverWait(wd, timeout)  # seconds
+        wait.until(EC.visibility_of_element_located((By.XPATH, "//div[@class='toast-message']//a[.='Открыть отчеты']")))
+        wd.find_element_by_xpath("//div[@class='toast-message']//a[.='Открыть отчеты']").click()
+        #try:
+        #    text = self.app.wd.find_element_by_xpath(
+        #        "//div[@class='toast-message']//a[.='Открыть отчеты']").value_of_css_property("display")
+        #    if text == 'block':
+        #        return True
+        #except:
+        #    return False
 
     def destroy(self):
         self.wd.quit()

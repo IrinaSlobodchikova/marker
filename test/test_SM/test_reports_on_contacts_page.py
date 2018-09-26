@@ -6,14 +6,21 @@ def test_sm_create_contact_report_all_in_dif_row_tel_mail(app):
     password = app.password
     smParticipants = app.smParticipants
     smreports = app.smreports
+    reestr_ex = "Компании"
+    report_type_ex = "Контакты"
+    state_ex = "Формируется"
     app.session.ensure_login_sm(username, password)
     app.session.open_SM_page(smParticipants)
     app.testhelpersm.find_region2()
-    #app.testhelpersm.check_results()
+    app.testhelpersm.check_results()
     app.testhelpersm.create_contact_report_all_in_dif_row_tel_mail()
-    app.session.open_SM_page(smreports)
-    #app.testhelpersm.report_is_present()
-    #app.testhelpersm.status_is_changed()
+    app.wait_smBlock(20)
+    app.banner_link_button(30)
+    #app.session.open_SM_page(smreports)
+    #app.testhelpersm.get_report_list()
+    app.testhelpersm.report_is_present_short(reestr_ex, report_type_ex, state_ex)
+    assert(app.testhelpersm.report_is_present_short(reestr_ex, report_type_ex, state_ex) == True)
+    assert(app.status_is_changed(state_ex, 360) != "Ошибка")
     #app.testhelpersm.get_link()
 
 
@@ -22,14 +29,19 @@ def test_sm_create_contact_report_allinone_tel_mail(app):
     password = app.password
     smParticipants = app.smParticipants
     smreports = app.smreports
+    reestr_ex = "Компании"
+    report_type_ex = "Контакты"
+    state_ex = "Формируется"
     app.session.ensure_login_sm(username, password)
     app.session.open_SM_page(smParticipants)
     app.testhelpersm.find_region2()
-    #app.testhelpersm.check_results()
+    app.testhelpersm.check_results()
     app.testhelpersm.create_contact_report_allinone_tel_mail()
-    app.session.open_SM_page(smreports)
-    #app.testhelpersm.report_is_present()
-    #app.testhelpersm.status_is_changed()
+    app.banner_link_button(30)
+    #app.session.open_SM_page(smreports)
+    app.testhelpersm.report_is_present_short(reestr_ex, report_type_ex, state_ex)
+    assert(app.testhelpersm.report_is_present_short(reestr_ex, report_type_ex, state_ex) == True)
+    assert(app.status_is_changed(state_ex, 360) != "Ошибка")
     #app.testhelpersm.get_link()
 
 
@@ -38,14 +50,19 @@ def test_sm_create_contact_report_result(app):
     password = app.password
     smParticipants = app.smParticipants
     smreports = app.smreports
+    reestr_ex = "Компании"
+    report_type_ex = "Результаты поиска"
+    state_ex = "Формируется"
     app.session.ensure_login_sm(username, password)
     app.session.open_SM_page(smParticipants)
     app.testhelpersm.find_region2()
-    #app.testhelpersm.check_results()
+    app.testhelpersm.check_results()
     app.testhelpersm.create_contact_report_result()
-    app.session.open_SM_page(smreports)
-    #app.testhelpersm.report_is_present()
-    #app.testhelpersm.status_is_changed()
+    app.banner_link_button(30)
+    #app.session.open_SM_page(smreports)
+    app.testhelpersm.report_is_present_short(reestr_ex, report_type_ex, state_ex)
+    assert(app.testhelpersm.report_is_present_short(reestr_ex, report_type_ex, state_ex) == True)
+    assert(app.status_is_changed(state_ex, 360) != "Ошибка")
     #app.testhelpersm.get_link()
 
 
@@ -54,14 +71,19 @@ def test_sm_create_contact_report_statictic(app):
     password = app.password
     smParticipants = app.smParticipants
     smreports = app.smreports
+    reestr_ex = "Компании"
+    report_type_ex = "Статистика"
+    state_ex = "Формируется"
     app.session.ensure_login_sm(username, password)
     app.session.open_SM_page(smParticipants)
     app.testhelpersm.find_region2()
-    #app.testhelpersm.check_results()
+    app.testhelpersm.check_results()
     app.testhelpersm.create_contact_report_statictic()
-    app.session.open_SM_page(smreports)
-    #app.testhelpersm.report_is_present()
-    #app.testhelpersm.status_is_changed()
+    app.banner_link_button(30)
+    #app.session.open_SM_page(smreports)
+    app.testhelpersm.report_is_present_short(reestr_ex, report_type_ex, state_ex)
+    assert(app.testhelpersm.report_is_present_short(reestr_ex, report_type_ex, state_ex) == True)
+    assert(app.status_is_changed(state_ex, 360) != "Ошибка")
     #app.testhelpersm.get_link()
 
 def test_sm_create_contact_list(app):
@@ -74,7 +96,7 @@ def test_sm_create_contact_list(app):
     app.testhelpersm.find_region2()
     #app.testhelpersm.check_results()
     app.testhelpersm.create_contact_list()
-    app.session.open_SM_page(smreports)
+    #app.session.open_SM_page(smreports)
     #app.testhelpersm.report_is_present()
     #app.testhelpersm.status_is_changed()
     #app.testhelpersm.get_link()
