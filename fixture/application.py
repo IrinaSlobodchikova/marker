@@ -5,6 +5,7 @@ from fixture.testhelpersm import testHelperSM
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
+import datetime
 
 
 class Application:
@@ -57,7 +58,7 @@ class Application:
         self.smNmckList = smNmckList
         self.smUser_History = smUser_History
         self.smlogout = smlogout
-        self.wd.implicitly_wait(5)
+        self.wd.implicitly_wait(10)
 
     def is_valid(self):
         try:
@@ -76,7 +77,7 @@ class Application:
     def open_sm_home_page(self):
         wd = self.wd
         wd.get(self.baseUrlSM)
-        self.wait_smBlock(5)
+        #self.wait_smBlock(5)
 
 
     #def return_to_home_page(self):
@@ -107,11 +108,11 @@ class Application:
         else:
             return state
 
-    def banner_link_button(self, timeout):
+    def banner_link_button(self, timeout, i):
         wd = self.wd
         wait = WebDriverWait(wd, timeout)  # seconds
-        wait.until(EC.visibility_of_element_located((By.XPATH, "//div[@class='toast-message']//a[.='Открыть отчеты']")))
-        wd.find_element_by_xpath("//div[@class='toast-message']//a[.='Открыть отчеты']").click()
+        wait.until(EC.visibility_of_element_located((By.XPATH, "//div[@class='toast-message']//a[.='%s']" % i)))
+        wd.find_element_by_xpath("//div[@class='toast-message']//a[.='%s']" % i) .click()
         #try:
         #    text = self.app.wd.find_element_by_xpath(
         #        "//div[@class='toast-message']//a[.='Открыть отчеты']").value_of_css_property("display")
@@ -119,6 +120,13 @@ class Application:
         #        return True
         #except:
         #    return False
+
+    def current_date_time(self):
+        i = datetime.datetime.now()
+        current_date = ("%s" % i.day + "." + "%s" % i.month + "." + "%s" % i.year)
+        current_time = ("%s" % i.hour + ":" + "%s" % i.minute)
+
+        return i
 
     def destroy(self):
         self.wd.quit()

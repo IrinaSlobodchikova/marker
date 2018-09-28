@@ -1,4 +1,6 @@
 import re
+
+#import datetime
 #from random import randrange
 
 
@@ -17,7 +19,7 @@ class testHelperSM:
 
     def find_region2(self):
         wd = self.app.wd
-        self.app.wait_smBlock(20)
+        self.app.wait_smBlock(120)
         wd.find_element_by_xpath("//div[@id='aggregatesPlaceholder']/table/tbody/tr/td[2]/div/div/div[1]/span[2]").click()
         wd.find_element_by_xpath("//div[@id='mCSB_6_container']/div/ul/li[20]/label").click()
         wd.find_element_by_id("aggSearchText").click()
@@ -42,6 +44,7 @@ class testHelperSM:
             return False
 
     def check_results(self):
+        self.app.wait_smBlock(120)
         if self.is_smresult_not_0():
             result = self.get_total_results()
             return result
@@ -95,15 +98,36 @@ class testHelperSM:
         self.app.wait_sm_artefact_Block(10)
         wd.find_element_by_xpath("//div[@id='divReportStatisticsSettings']//button[.='Сформировать']").click()
 
-    def create_contact_list(self):
+    def create_contact_list_10000(self, cd2):
         wd = self.app.wd
         self.app.wait_smBlock(20)
         wd.find_element_by_xpath("//li[@id='UpdateList']//p[.='Добавить']").click()
         wd.find_element_by_xpath("//input[@class='ui-autocomplete-input']").click()
         wd.find_element_by_xpath("//input[@class='ui-autocomplete-input']").clear()
-        wd.find_element_by_xpath("//input[@class='ui-autocomplete-input']").send_keys("список компаний123")
+        wd.find_element_by_xpath("//input[@class='ui-autocomplete-input']").send_keys("список компаний %s" % cd2)
         wd.find_element_by_xpath("//div[@id='addOrUpdateEntitiesListSearchDlg']//button[.='Сохранить']").click()
 
+    def create_contact_list_50(self, cd2):
+        wd = self.app.wd
+        self.app.wait_smBlock(120)
+        #выбор 50
+        self.select_all_50()
+        #создание первых списка по первым 50 компаниям
+        wd.find_element_by_xpath("//li[@id='UpdateList']//p[.='Добавить']").click()
+        wd.find_element_by_css_selector("td.w250").click()
+        wd.find_element_by_xpath("//input[@class='ui-autocomplete-input']").click()
+        wd.find_element_by_xpath("//div[@id='autoCompleteRequestsContainer0']/a/span").click()
+        wd.find_element_by_id("ui-id-2").click()
+        wd.find_element_by_xpath("//input[@class='ui-autocomplete-input']").click()
+        wd.find_element_by_xpath("//input[@class='ui-autocomplete-input']").clear()
+        wd.find_element_by_xpath("//input[@class='ui-autocomplete-input']").send_keys("список компаний %s" % cd2)
+        wd.find_element_by_xpath("//div[@id='addOrUpdateEntitiesListSearchDlg']//button[.='Сохранить']").click()
+
+    def select_all_50(self):
+        wd = self.app.wd
+        wd.find_element_by_xpath("//label[@for='allItemsCb']").click()
+        if not wd.find_element_by_id("allItemsCb").is_selected():
+            wd.find_element_by_id("allItemsCb").click()
 
     def contact_from_contact_rep_is_present(self):
         wd = self.app.wd
@@ -111,6 +135,10 @@ class testHelperSM:
 
     def clear_result(self, s):
         x = re.sub(" ", "", str(s))
+        return x
+
+    def clear_spase_result(self, s):
+        x = re.sub(" ", "", str(s))
         return x
 
     report_cache = None
@@ -128,9 +156,43 @@ class testHelperSM:
         return False
         #return reestr, report_type, state
 
+    def get_old_contact_list(self):
+        pass
 
+    def contact_list_is_present(self):
+        wd = self.app.wd
+        #проверить время
+        #проверить название
+        #открыть (нужен метод принимающий название)
+        #проверить заголовок
 
+    def ensure_link_work(self):
+        wd = self.app.wd
+        header = wd.find_element_by_css_selector("h1.clip").text
+        return header.rstrip()
 
+    def ensure_link_type2_work(self):
+        wd = self.app.wd
+        header = wd.find_element_by_css_selector("h2").text
+        return header[0:8]
+
+    def delete_report(self):
+        pass
+
+    def delete_first_contact_list(self):
+        wd = self.app.wd
+        self.app.wait_smBlock(20)
+        #придумать как найти чекбокс внизу чушь
+        list = []
+        #for row in wd.find_element_by_xpath("//input[@class='row-cb']"):
+        #    cells = row.find_elements_by_tag_name("td")
+        #    id = cells[0].find_element_by_tag_name("input").get_attribute("data-id")
+        wd.find_element_by_xpath("//div[@class='panel_layer']/div[2]/table/tbody/tr[1]/td[1]").click()
+        if not wd.find_elements_by_xpath("//div[@class='panel_layer']/div[2]/table/tbody/tr[1]/td[1]").is_selected():
+            wd.find_element_by_xpath("//div[@class='panel_layer']/div[2]/table/tbody/tr[1]/td[1]").click()
+
+        wd.find_element_by_id("btnDel").click()
+        wd.find_element_by_xpath("//div[@id='dlgYesNo']//button[.='Да']").click()
 
 
     def get_report_list(self):
