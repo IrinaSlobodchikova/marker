@@ -77,13 +77,10 @@ class Application:
     def open_sm_home_page(self):
         wd = self.wd
         wd.get(self.baseUrlSM)
-        #self.wait_smBlock(5)
+        self.wait_smBlock(5)
 
 
-    #def return_to_home_page(self):
-    #    wd = self.wd
-    #    if  not (wd.current_url.endswith("addressbook/") and len(wd.find_elements_by_name("add")) > 0):
-    #        wd.find_element_by_link_text("home").click()
+
 
     def wait_smBlock(self, timeout):
         wd = self.wd
@@ -95,7 +92,6 @@ class Application:
     def wait_sm_artefact_Block(self, timeout):
         wd = self.wd
         if self.session.is_sm_artef_blocked():
-            # text = self.app.wd.find_element_by_id("smBlock").value_of_css_property("display")
             wait = WebDriverWait(wd, timeout)  # seconds
             wait.until(EC.invisibility_of_element((By.CSS_SELECTOR, "div.dlg-content_loader.dlg-content_loader--center")))
 
@@ -113,19 +109,10 @@ class Application:
         wait = WebDriverWait(wd, timeout)  # seconds
         wait.until(EC.visibility_of_element_located((By.XPATH, "//div[@class='toast-message']//a[.='%s']" % i)))
         wd.find_element_by_xpath("//div[@class='toast-message']//a[.='%s']" % i) .click()
-        #try:
-        #    text = self.app.wd.find_element_by_xpath(
-        #        "//div[@class='toast-message']//a[.='Открыть отчеты']").value_of_css_property("display")
-        #    if text == 'block':
-        #        return True
-        #except:
-        #    return False
+
 
     def current_date_time(self):
         i = datetime.datetime.now()
-        current_date = ("%s" % i.day + "." + "%s" % i.month + "." + "%s" % i.year)
-        current_time = ("%s" % i.hour + ":" + "%s" % i.minute)
-
         return i
 
     def destroy(self):

@@ -58,7 +58,7 @@ class testHelperSM:
         #clear_result = wd.find_element_by_xpath("//div[@class='panel_header']/h2").get_attribute("textContent")[13:len(results)]
         clear_result = results[13:len(results)]
         return self.clear_result(clear_result)
-        #убрать пробелы перевести в инт
+
 
     def create_contact_report_all_in_dif_row_tel_mail(self):
         wd = self.app.wd
@@ -120,8 +120,12 @@ class testHelperSM:
         wd.find_element_by_id("ui-id-2").click()
         wd.find_element_by_xpath("//input[@class='ui-autocomplete-input']").click()
         wd.find_element_by_xpath("//input[@class='ui-autocomplete-input']").clear()
+        #wd.find_element_by_xpath("//input[@class='ui-autocomplete-input']").send_keys("список компаний %s" % cd2)
+        wd.find_element_by_xpath("//input[@class='ui-autocomplete-input']").click()
+        wd.find_element_by_xpath("//input[@class='ui-autocomplete-input']").clear()
         wd.find_element_by_xpath("//input[@class='ui-autocomplete-input']").send_keys("список компаний %s" % cd2)
         wd.find_element_by_xpath("//div[@id='addOrUpdateEntitiesListSearchDlg']//button[.='Сохранить']").click()
+
 
     def select_all_50(self):
         wd = self.app.wd
@@ -159,11 +163,38 @@ class testHelperSM:
     def get_old_contact_list(self):
         pass
 
-    def contact_list_is_present(self):
+    def contact_list_is_present(self, cd2):
         wd = self.app.wd
         #проверить время
-        #проверить название
+        cd_contact_list = wd.find_element_by_xpath("//div[@class='panel_layer']/div[2]/table/tbody/tr[1]/td[2]").text
+        current_name = wd.find_element_by_xpath("//div[@class='panel_layer']/div[2]/table/tbody/tr[1]/td[3]").text
+        created_name = "список компаний" + " " + cd2
+        cd_contact_list_date = cd_contact_list[0:2]
+        cd2_date = cd2[0:2]
+        cd_contact_list_month = cd_contact_list[3:5]
+        cd2_month = cd2[3:5]
+        cd_contact_list_year = cd_contact_list[6:10]
+        cd2_year = cd2[6:10]
+        if len(cd_contact_list) == 18:
+            cd_contact_list_hour = cd_contact_list[11:12]
+            cd_contact_list_minute = cd_contact_list[13:15]
+        else:
+            cd_contact_list_hour = cd_contact_list[11:13]
+            cd_contact_list_minute = cd_contact_list[14:16]
+        cd2_hour = cd2[11:13]
+        cd2_minute = cd2[14:16]
+        if cd_contact_list_date == cd2_date:
+            if cd_contact_list_month == cd2_month:
+                if cd_contact_list_year == cd2_year:
+                    if cd_contact_list_hour == cd2_hour or cd_contact_list_hour == cd2_hour[1:2]:
+                        if cd_contact_list_minute == cd2_minute:
+                            if current_name.startwith(created_name):
+                                return True
+        else:
+            return False
+
         #открыть (нужен метод принимающий название)
+
         #проверить заголовок
 
     def ensure_link_work(self):

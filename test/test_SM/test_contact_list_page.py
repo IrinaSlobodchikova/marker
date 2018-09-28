@@ -16,7 +16,7 @@ def test_sm_create_contact_list(app):
     #app.testhelpersm.create_contact_list_10000(cd2)
     app.testhelpersm.create_contact_list_50(cd2)
     app.banner_link_button(30, i)
-    #app.testhelpersm.contact_list_is_present()
+    assert(app.testhelpersm.contact_list_is_present(cd2) == True)
     #app.testhelpersm.get_link()
 
 
