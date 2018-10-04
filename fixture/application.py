@@ -5,16 +5,19 @@ from fixture.testhelpersm import testHelperSM
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
+from fixture.text_to_change import text_to_change
 import datetime
 
 
 class Application:
 
-    def __init__(self, browser, config, environment, baseUrlMarker, baseUrlSM, username, password, dashboard,
+    def __init__(self, browser, config, environment, check_report_result, baseUrlMarker, baseUrlSM, username, password, dashboard,
                  newtenders, participation, watch, market_potential, planned_purchases, company_list, solutions,
                  reports, smParticipants, smParticipantsCustomers, smParticipantsSuppliers, smPurchases, smPrices,
                  smCertificates, smLicences, smKontrol, smreports, smMonitorinds, smcompany_list, smPurchases_list,
-                 smNmckList, smUser_History, smlogout):
+                 smNmckList, smUser_History, smlogout, smAdminUserInfo, smAdminUpravlenie, smAdminShlyuz,
+                 smAdminAccessManager, smAdminInstructions, smAdminNotifications, smAdminNews, smAdminSessions,
+                 admindashboard, adminfind_monitorings, adminfind_users, adminfind_publication, adminnews):
         if browser == "firefox":
             self.wd = webdriver.Firefox(firefox_binary="C:\\Program Files\\Mozilla Firefox\\firefox.exe")
         elif browser == "chrome":
@@ -28,8 +31,10 @@ class Application:
         self.session = SessionHelper(self)
         self.testhelper = testHelperMarker(self)
         self.testhelpersm = testHelperSM(self)
+        self.text_to_change = text_to_change
         self.config = config
         self.environment = environment
+        self.check_report_result = check_report_result
         self.baseUrlMarker = baseUrlMarker
         self.baseUrlSM = baseUrlSM
         self.username = username
@@ -58,6 +63,19 @@ class Application:
         self.smNmckList = smNmckList
         self.smUser_History = smUser_History
         self.smlogout = smlogout
+        self.smAdminUserInfo = smAdminUserInfo
+        self.smAdminUpravlenie = smAdminUpravlenie
+        self.smAdminShlyuz = smAdminShlyuz
+        self.smAdminAccessManager = smAdminAccessManager
+        self.smAdminInstructions = smAdminInstructions
+        self.smAdminNotifications = smAdminNotifications
+        self.smAdminNews = smAdminNews
+        self.smAdminSessions = smAdminSessions
+        self.admindashboard = admindashboard
+        self.adminfind_monitorings = adminfind_monitorings
+        self.adminfind_users = adminfind_users
+        self.adminfind_publication = adminfind_publication
+        self.adminnews = adminnews
         self.wd.implicitly_wait(10)
 
     def is_valid(self):
@@ -97,10 +115,13 @@ class Application:
 
     def status_is_changed(self, state_ex, timeout):
         wd = self.wd
-        state = wd.find_element_by_xpath("//div[@id='reports']/div[3]/table/tbody/tr[1]/td[5]").text
+        state = wd.find_element_by_xpath("//div[@id='reports']/div[3]/table/tbody/tr[1]/td[5]").text.rstrip()
         if state == state_ex:
             wait = WebDriverWait(wd, timeout)  # seconds
-            wait.until(EC.text_to_be_present_in_element((By.XPATH, "//div[@id='reports']/div[3]/table/tbody/tr[1]/td[5]"), "Создан"))
+            #wait.until(EC.text_to_be_present_in_element((By.XPATH, "//div[@id='reports']/div[3]/table/tbody/tr[1]/td[5]"), "Создан"))
+            wait.until(text_to_change((By.XPATH, "//div[@id='reports']/div[3]/table/tbody/tr[1]/td[5]"), state_ex))
+            state2 = wd.find_element_by_xpath("//div[@id='reports']/div[3]/table/tbody/tr[1]/td[5]").text.rstrip()
+            return state2
         else:
             return state
 

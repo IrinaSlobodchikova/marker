@@ -1,4 +1,4 @@
-
+import time
 
 
 class SessionHelper:
@@ -12,10 +12,14 @@ class SessionHelper:
         wd.find_element_by_css_selector("button.mainbtn").click()
         wd.find_element_by_name("username").click()
         wd.find_element_by_name("username").clear()
+        wd.find_element_by_name("username").click()
         wd.find_element_by_name("username").send_keys(username)
+        time.sleep(5)
         wd.find_element_by_name("password").click()
         wd.find_element_by_name("password").clear()
+        wd.find_element_by_name("username").click()
         wd.find_element_by_name("password").send_keys(password)
+        time.sleep(5)
         wd.find_element_by_css_selector("button.navbar-btn.mainbtn").click()
 
     def Marker_logout(self):
@@ -60,10 +64,14 @@ class SessionHelper:
         #if not self.is_logged_in_sm():
         wd.find_element_by_name("UserName").click()
         wd.find_element_by_name("UserName").clear()
+        wd.find_element_by_name("UserName").click()
         wd.find_element_by_name("UserName").send_keys(username)
+        time.sleep(5)
         wd.find_element_by_name("Password").click()
         wd.find_element_by_name("Password").clear()
+        wd.find_element_by_name("UserName").click()
         wd.find_element_by_name("Password").send_keys(password)
+        time.sleep(5)
         wd.find_element_by_xpath("//form[@id='form-login']//button[.='Войти']").click()
 
 
@@ -90,11 +98,13 @@ class SessionHelper:
 
     def get_logged_user_sm(self):
         wd = self.app.wd
+        self.app.wait_smBlock(60)
         text1 = wd.find_element_by_css_selector("span.hdr_user-menu_name").get_attribute("textContent")
         return text1
 
     def ensure_login_sm(self, username, password):
         wd = self.app.wd
+        self.app.wait_smBlock(60)
         if self.is_logged_in_sm():
             if self.is_logged_in_as_sm(username):
                 return

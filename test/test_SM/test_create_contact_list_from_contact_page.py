@@ -1,0 +1,28 @@
+
+
+def test_sm_create_contact_list(app):
+    i = "Перейти в списки компаний"
+    text = "список компаний %s"
+    app.session.ensure_login_sm(app.username, app.password)
+    app.session.ensure_login_sm(app.username, app.password)
+    app.session.open_SM_page(app.smParticipants)
+    app.testhelpersm.find_in_container_number(6, 0)
+    if app.testhelpersm.check_results() == '0':
+        tr = 1
+        while app.testhelpersm.check_results() == '0' and tr < 20:
+            app.session.open_SM_page(app.smPurchases)
+            app.testhelpersm.find_in_container_number(6, 0)
+            tr = tr + 1
+    #app.testhelpersm.get_old_contact_list()
+    cd2 = app.current_date_time().strftime('%d.%m.%Y %H:%M')
+    app.testhelpersm.create_contact_list_10000(cd2, text)
+    #app.testhelpersm.create_purchases_company_list_50(cd2, text)
+    app.banner_link_button(30, i)
+    assert(app.testhelpersm.contact_or_purchases_list_is_present(cd2, text) == True)
+    #app.testhelpersm.get_link()
+
+
+#def test_sm_delete_contact_list(app):
+#    app.session.ensure_login_sm(app.username, app.password)
+#    app.session.open_SM_page(app.smcompany_list)
+#    app.testhelpersm.delete_first_contact_list()

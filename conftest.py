@@ -26,9 +26,11 @@ def app(request, config):
     global fixture
     browser = request.config.getoption("--browser")
     environment = request.config.getoption("--environment")
+    #check_report_result = request.config.getoption("--check_report_result")
     #web_config = load_config(request.config.getoption("--target"))['dev_marker']
     if fixture is None or not fixture.is_valid():
         fixture = Application(browser=browser, config=config, environment=environment,
+                              check_report_result=config[environment]['check_report_result'],
                               baseUrlSM=config[environment]['baseUrlSM'],
                               baseUrlMarker=config[environment]['baseUrlMarker'],
                               username=config[environment]['username'],
@@ -56,7 +58,20 @@ def app(request, config):
                               smPurchases_list=config['SMtails']['Purchases_list'],
                               smNmckList=config['SMtails']['NmckList'],
                               smUser_History=config['SMtails']['User_History'],
-                              smlogout=config['SMtails']['logout']
+                              smlogout=config['SMtails']['logout'],
+                              smAdminUserInfo=config['AdminSMtails']['UserInfo'],
+                              smAdminUpravlenie=config['AdminSMtails']['Upravlenie'],
+                              smAdminShlyuz=config['AdminSMtails']['Shlyuz'],
+                              smAdminAccessManager=config['AdminSMtails']['AccessManager'],
+                              smAdminInstructions=config['AdminSMtails']['Instructions'],
+                              smAdminNotifications=config['AdminSMtails']['Notifications'],
+                              smAdminNews=config['AdminSMtails']['News'],
+                              smAdminSessions=config['AdminSMtails']['Sessions'],
+                              admindashboard=config['AdminMarkertails']['dashboard'],
+                              adminfind_monitorings=config['AdminMarkertails']['find_monitorings'],
+                              adminfind_users=config['AdminMarkertails']['find_users'],
+                              adminfind_publication=config['AdminMarkertails']['find_publication'],
+                              adminnews=config['AdminMarkertails']['news']
         )
     #fixture.session.ensure_login(username=web_config['username'], password=web_config['password'])
     return fixture
@@ -91,7 +106,8 @@ def stop(request):
 
 
 def pytest_addoption(parser):
-    parser.addoption("--browser", action="store", default="chrome")
+    parser.addoption("--browser", action="store", default="firefox")
     parser.addoption("--target", action="store", default="target.json")
-    parser.addoption("--environment", action="store", default="dev")
-    # parser.addoption("--check_ui", action="store_true")
+    parser.addoption("--environment", action="store", default="prod")
+    #parser.addoption("--check_report_result", action="store", default="True")
+    #parser.addoption("--check_ui", action="store_true")
