@@ -15,7 +15,7 @@ def test_sm_create_report_covladeltsy(app):
     if app.testhelpersm.check_results() == '0':
         tr = 1
         while app.testhelpersm.check_results() == '0' and tr < 20:
-            app.session.open_SM_page(app.smPurchases)
+            app.session.open_SM_page(app.smParticipants)
             app.testhelpersm.find_in_container_number(6, 0)
             tr = tr + 1
     cd2 = app.current_date_time().strftime('%d.%m.%Y %H:%M')
@@ -47,7 +47,7 @@ def test_sm_create_report_affelir(app):
     if app.testhelpersm.check_results() == '0':
         tr = 1
         while app.testhelpersm.check_results() == '0' and tr < 20:
-            app.session.open_SM_page(app.smPurchases)
+            app.session.open_SM_page(app.smParticipants)
             app.testhelpersm.find_in_container_number(6, 0)
             tr = tr + 1
     cd2 = app.current_date_time().strftime('%d.%m.%Y %H:%M')
@@ -79,7 +79,7 @@ def test_sm_create_report_contacts_from_contact_list_all_in_one_row(app):
     if app.testhelpersm.check_results() == '0':
         tr = 1
         while app.testhelpersm.check_results() == '0' and tr < 20:
-            app.session.open_SM_page(app.smPurchases)
+            app.session.open_SM_page(app.smParticipants)
             app.testhelpersm.find_in_container_number(6, 0)
             tr = tr + 1
     cd2 = app.current_date_time().strftime('%d.%m.%Y %H:%M')
@@ -111,7 +111,7 @@ def test_sm_create_report_contacts_from_contact_list_all_in_dif_row(app):
     if app.testhelpersm.check_results() == '0':
         tr = 1
         while app.testhelpersm.check_results() == '0' and tr < 20:
-            app.session.open_SM_page(app.smPurchases)
+            app.session.open_SM_page(app.smParticipants)
             app.testhelpersm.find_in_container_number(6, 0)
             tr = tr + 1
     cd2 = app.current_date_time().strftime('%d.%m.%Y %H:%M')
@@ -143,7 +143,7 @@ def test_sm_create_report_result(app):
     if app.testhelpersm.check_results() == '0':
         tr = 1
         while app.testhelpersm.check_results() == '0' and tr < 20:
-            app.session.open_SM_page(app.smPurchases)
+            app.session.open_SM_page(app.smParticipants)
             app.testhelpersm.find_in_container_number(6, 0)
             tr = tr + 1
     cd2 = app.current_date_time().strftime('%d.%m.%Y %H:%M')

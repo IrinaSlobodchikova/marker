@@ -115,8 +115,8 @@ def test_sm_create_report_contacts_from_purchases_list_all_in_one_row(app):
             app.testhelpersm.find_in_container_number(12, 0)
             tr = tr + 1
     cd2 = app.current_date_time().strftime('%d.%m.%Y %H:%M')
-    app.testhelpersm.create_contact_list_10000(cd2, text)
-    #app.testhelpersm.create_purchases_list_50(cd2, text)
+    #app.testhelpersm.create_contact_list_10000(cd2, text)
+    app.testhelpersm.create_purchases_list_50(cd2, text)
     app.banner_link_button(30, i1)
     assert (app.testhelpersm.contact_or_purchases_list_is_present(cd2, text) == True)
     app.testhelpersm.open_first_contact_list()
@@ -147,8 +147,8 @@ def test_sm_create_report_contacts_from_purchases_list_all_in_dif_row(app):
             app.testhelpersm.find_in_container_number(12, 0)
             tr = tr + 1
     cd2 = app.current_date_time().strftime('%d.%m.%Y %H:%M')
-    app.testhelpersm.create_contact_list_10000(cd2, text)
-    #app.testhelpersm.create_purchases_list_50(cd2, text)
+    #app.testhelpersm.create_contact_list_10000(cd2, text)
+    app.testhelpersm.create_purchases_list_50(cd2, text)
     app.banner_link_button(30, i1)
     assert (app.testhelpersm.contact_or_purchases_list_is_present(cd2, text) == True)
     app.testhelpersm.open_first_contact_list()
@@ -179,8 +179,8 @@ def test_sm_create_report_prices_zakazchik(app):
             app.testhelpersm.find_in_container_number(12, 0)
             tr = tr + 1
     cd2 = app.current_date_time().strftime('%d.%m.%Y %H:%M')
-    app.testhelpersm.create_contact_list_10000(cd2, text)
-    #app.testhelpersm.create_purchases_list_50(cd2, text)
+    #app.testhelpersm.create_contact_list_10000(cd2, text)
+    app.testhelpersm.create_purchases_list_50(cd2, text)
     app.banner_link_button(30, i1)
     assert (app.testhelpersm.contact_or_purchases_list_is_present(cd2, text) == True)
     app.testhelpersm.open_first_contact_list()
@@ -211,8 +211,8 @@ def test_sm_create_report_prices_postavschik(app):
             app.testhelpersm.find_in_container_number(12, 0)
             tr = tr + 1
     cd2 = app.current_date_time().strftime('%d.%m.%Y %H:%M')
-    app.testhelpersm.create_contact_list_10000(cd2, text)
-    #app.testhelpersm.create_purchases_list_50(cd2, text)
+    #app.testhelpersm.create_contact_list_10000(cd2, text)
+    app.testhelpersm.create_purchases_list_50(cd2, text)
     app.banner_link_button(30, i1)
     assert (app.testhelpersm.contact_or_purchases_list_is_present(cd2, text) == True)
     app.testhelpersm.open_first_contact_list()

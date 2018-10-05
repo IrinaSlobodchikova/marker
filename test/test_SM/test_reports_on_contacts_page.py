@@ -13,7 +13,7 @@ def test_sm_create_contact_report_all_in_dif_row_tel_mail(app):
     if app.testhelpersm.check_results() == '0':
         tr = 1
         while app.testhelpersm.check_results() == '0' and tr < 20:
-            app.session.open_SM_page(app.smPurchases)
+            app.session.open_SM_page(app.smParticipants)
             app.testhelpersm.find_in_container_number(6, 0)
             tr = tr + 1
     cd2 = app.current_date_time().strftime('%H:%M')
@@ -41,7 +41,7 @@ def test_sm_create_contact_report_allinone_tel_mail(app):
     if app.testhelpersm.check_results() == '0':
         tr = 1
         while app.testhelpersm.check_results() == '0' and tr < 20:
-            app.session.open_SM_page(app.smPurchases)
+            app.session.open_SM_page(app.smParticipants)
             app.testhelpersm.find_in_container_number(6, 0)
             tr = tr + 1
     cd2 = app.current_date_time().strftime('%H:%M')
@@ -68,7 +68,7 @@ def test_sm_create_contact_report_result(app):
     if app.testhelpersm.check_results() == '0':
         tr = 1
         while app.testhelpersm.check_results() == '0' and tr < 20:
-            app.session.open_SM_page(app.smPurchases)
+            app.session.open_SM_page(app.smParticipants)
             app.testhelpersm.find_in_container_number(6, 0)
             tr = tr + 1
     cd2 = app.current_date_time().strftime('%H:%M')
@@ -94,7 +94,7 @@ def test_sm_create_contact_report_statictic(app):
     if app.testhelpersm.check_results() == '0':
         tr = 1
         while app.testhelpersm.check_results() == '0' and tr < 20:
-            app.session.open_SM_page(app.smPurchases)
+            app.session.open_SM_page(app.smParticipants)
             app.testhelpersm.find_in_container_number(6, 0)
             tr = tr + 1
     cd2 = app.current_date_time().strftime('%H:%M')

@@ -53,6 +53,7 @@ class testHelperSM:
     def find_in_container_number(self, range_container_numbers, container_number):
         wd = self.app.wd
         self.app.wait_smBlock(120)
+        spicok = []
         i = randrange(1, 4, 1)
         if container_number == 0:
             ct = randrange(1, range_container_numbers, 1)
@@ -95,6 +96,7 @@ class testHelperSM:
             i = 2
             wd.find_element_by_xpath("//div[@id='mCSB_2_container']/ul/li[%s]/label" % str(i)).click()
         wd.find_element_by_xpath("//form[@id='frmSearch']//button[.='Поиск']").click()
+        return i, ct
 
     def is_sm_advSearch_is_displayed(self):
         try:
@@ -126,17 +128,22 @@ class testHelperSM:
         wd.find_element_by_xpath("//form[@id='frmSearch']//button[.='Поиск']").click()
 
 
-    def get_artef_list(self):
+    def get_artef_list(self, ct):
         wd = self.app.wd
         rows = []
         index = -1
-        for row in wd.find_elements_by_xpath("//div[@id='mCSB_5_container']/ul/li"):
+        for row in wd.find_elements_by_xpath("//div[@id='mCSB_%s_container']/ul/li" % ct):
             index = index + 1
             cells = row.find_elements_by_tag_name("span")
             results = cells[0].find_element_by_tag_name("em").text
-            town = cells[3].text
-        return rows[index, town, results]
+            parametr = cells[3].text
+            return row[index, parametr, results]
+        return
 
+    def get_artef_param_by_index(self, index, ct):
+        wd = self.app.wd
+        list = self.get_artef_list(ct)
+        return list[index]
 
     def is_smresult_not_0(self):
         try:
@@ -315,6 +322,25 @@ class testHelperSM:
             return True
         return False
 
+    def monitoring_is_present(self, cd2, cd3, text, reestr_ex):
+        wd = self.app.wd
+        wd.refresh()
+        self.app.wait_smBlock(60)
+        date = wd.find_element_by_xpath("//div[@class='panel_layer']/div[2]/table/tbody/tr[1]/td[2]").text.rstrip()
+        exp_date = "Сегодня " + cd3
+        cd2_hour = cd3[0:2]
+        cd2_minute = cd3[3:5]
+        exp_name = text[0:-3] + " " + cd2
+        exp_date2 = "Сегодня " + cd2_hour + ":" + str(int(cd2_minute) + 1)
+        reestr = wd.find_element_by_xpath("//div[@class='panel_layer']/div[2]/table/tbody/tr[1]/td[3]").text.rstrip()
+        name = wd.find_element_by_xpath("//div[@class='panel_layer']//a[.='%s']" % exp_name).text.rstrip()
+        #name = wd.find_element_by_xpath("//div[@class='panel_layer']/div[2]/table/tbody/tr[1]/td[4]").text.rstrip()
+        if date == exp_date or date == exp_date2:
+            if reestr == reestr_ex:
+                if name == exp_name:
+                    return True
+        return False
+
     def contact_or_purchases_list_is_present(self, cd2, text):
         wd = self.app.wd
         #проверить время
@@ -443,6 +469,16 @@ class testHelperSM:
         self.app.wait_smBlock(120)
         wd.find_element_by_xpath("//div[@class='panel_header']//p[.='ФАС']").click()
         wd.find_element_by_xpath("//div[@id='divFasComplaintsSettings']//button[.='Сформировать']").click()
+
+    def save_requesr(self, cd2, text):
+        wd = self.app.wd
+        self.app.wait_smBlock(120)
+        wd.find_element_by_link_text("Сохранить запрос").click()
+        wd.find_element_by_id("requestName").click()
+        wd.find_element_by_id("requestName").clear()
+        wd.find_element_by_id("requestName").send_keys(text % cd2)
+        time.sleep(2)
+        wd.find_element_by_xpath("//div[@id='divSaveRequest']//button[.='Сохранить']").click()
 
 
 

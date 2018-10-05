@@ -19,8 +19,8 @@ def test_sm_create_report_covladeltsy(app):
             app.testhelpersm.find_in_container_number(3, 0)
             tr = tr + 1
     cd2 = app.current_date_time().strftime('%d.%m.%Y %H:%M')
-    #app.testhelpersm.create_contact_list_10000(cd2, text)
-    app.testhelpersm.create_purchases_company_list_50(cd2, text)
+    app.testhelpersm.create_contact_list_10000(cd2, text)
+    #app.testhelpersm.create_purchases_company_list_50(cd2, text)
     app.banner_link_button(30, i1)
     assert(app.testhelpersm.contact_or_purchases_list_is_present(cd2, text) == True)
     app.testhelpersm.open_first_contact_list()
@@ -51,7 +51,7 @@ def test_sm_create_report_affelir(app):
             app.testhelpersm.find_in_container_number(3, 0)
             tr = tr + 1
     cd2 = app.current_date_time().strftime('%d.%m.%Y %H:%M')
-    #app.testhelpersm.create_contact_list_10000(cd2, text)
+    #pp.testhelpersm.create_contact_list_10000(cd2, text)
     app.testhelpersm.create_purchases_company_list_50(cd2, text)
     app.banner_link_button(30, i1)
     assert(app.testhelpersm.contact_or_purchases_list_is_present(cd2, text) == True)

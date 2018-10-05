@@ -10,7 +10,7 @@ def test_sm_create_contact_list(app):
     if app.testhelpersm.check_results() == '0':
         tr = 1
         while app.testhelpersm.check_results() == '0' and tr < 20:
-            app.session.open_SM_page(app.smPurchases)
+            app.session.open_SM_page(app.smParticipants)
             app.testhelpersm.find_in_container_number(6, 0)
             tr = tr + 1
     #app.testhelpersm.get_old_contact_list()
