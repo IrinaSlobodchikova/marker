@@ -8,6 +8,8 @@ def test_sm_create_report_covladeltsy(app):
     state_ex = "Формируется"
     i2 = "Открыть отчеты"
     text = "список компаний %s"
+    app.testhelpersm.refresh_page()
+    app.session.open_SM_page(app.smParticipantsCustomers)
     app.session.ensure_login_sm(app.username, app.password)
     app.session.ensure_login_sm(app.username, app.password)
     app.session.open_SM_page(app.smParticipantsCustomers)
@@ -40,6 +42,8 @@ def test_sm_create_report_affelir(app):
     state_ex = "Формируется"
     i2 = "Открыть отчеты"
     text = "список компаний %s"
+    app.testhelpersm.refresh_page()
+    app.session.open_SM_page(app.smParticipantsCustomers)
     app.session.ensure_login_sm(app.username, app.password)
     app.session.ensure_login_sm(app.username, app.password)
     app.session.open_SM_page(app.smParticipantsCustomers)
@@ -72,6 +76,8 @@ def test_sm_create_report_contacts_from_contact_list_all_in_one_row(app):
     state_ex = "Формируется"
     i2 = "Открыть отчеты"
     text = "список компаний %s"
+    app.testhelpersm.refresh_page()
+    app.session.open_SM_page(app.smParticipantsCustomers)
     app.session.ensure_login_sm(app.username, app.password)
     app.session.ensure_login_sm(app.username, app.password)
     app.session.open_SM_page(app.smParticipantsCustomers)
@@ -104,6 +110,8 @@ def test_sm_create_report_contacts_from_contact_list_all_in_dif_row(app):
     state_ex = "Формируется"
     i2 = "Открыть отчеты"
     text = "список компаний %s"
+    app.testhelpersm.refresh_page()
+    app.session.open_SM_page(app.smParticipantsCustomers)
     app.session.ensure_login_sm(app.username, app.password)
     app.session.ensure_login_sm(app.username, app.password)
     app.session.open_SM_page(app.smParticipantsCustomers)
@@ -136,6 +144,8 @@ def test_sm_create_report_result(app):
     state_ex = "Формируется"
     i2 = "Открыть отчеты"
     text = "список компаний %s"
+    app.testhelpersm.refresh_page()
+    app.session.open_SM_page(app.smParticipantsCustomers)
     app.session.ensure_login_sm(app.username, app.password)
     app.session.ensure_login_sm(app.username, app.password)
     app.session.open_SM_page(app.smParticipantsCustomers)

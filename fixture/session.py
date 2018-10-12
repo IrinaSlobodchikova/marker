@@ -74,6 +74,23 @@ class SessionHelper:
         time.sleep(5)
         wd.find_element_by_xpath("//form[@id='form-login']//button[.='Войти']").click()
 
+    def sm_admin_login(self, username, password):
+        wd = self.app.wd
+        self.app.open_sm_admin_home_page()
+        wd.find_element_by_css_selector("a.button.login").click()
+        #if not self.is_logged_in_sm():
+        wd.find_element_by_name("UserName").click()
+        wd.find_element_by_name("UserName").clear()
+        wd.find_element_by_name("UserName").click()
+        wd.find_element_by_name("UserName").send_keys(username)
+        time.sleep(5)
+        wd.find_element_by_name("Password").click()
+        wd.find_element_by_name("Password").clear()
+        wd.find_element_by_name("UserName").click()
+        wd.find_element_by_name("Password").send_keys(password)
+        time.sleep(5)
+        wd.find_element_by_xpath("//form[@id='form-login']//button[.='Войти']").click()
+
 
     def sm_logout(self):
         wd = self.app.wd
@@ -81,6 +98,13 @@ class SessionHelper:
         smlogout = self.app.smlogout
         #wd.maximize_window()
         wd.get(baseUrlSM + smlogout)
+
+    def sm_admin_logout(self):
+        wd = self.app.wd
+        baseAdminUrlMarker = self.app.baseAdminUrlMarker
+        smlogout = self.app.smlogout
+        #wd.maximize_window()
+        wd.get(baseAdminUrlMarker + smlogout)
 
 
     def ensure_logout_sm(self):
@@ -112,10 +136,26 @@ class SessionHelper:
                 self.sm_logout()
         self.sm_login(username, password)
 
+    def ensure_admin_login_sm(self, username, password):
+        wd = self.app.wd
+        self.app.wait_smBlock(60)
+        if self.is_logged_in_sm():
+            if self.is_logged_in_as_sm(username):
+                return
+            else:
+                self.sm_admin_logout()
+        self.sm_admin_login(username, password)
+
     def open_SM_page(self, page):
         wd = self.app.wd
         baseUrlSM = self.app.baseUrlSM
         wd.get(baseUrlSM + page)
+        self.app.wait_smBlock(5)
+
+    def open_admin_SM_page(self, page):
+        wd = self.app.wd
+        baseAdminUrlMarker = self.app.baseAdminUrlMarker
+        wd.get(baseAdminUrlMarker + page)
         self.app.wait_smBlock(5)
 
     def is_marker(self):

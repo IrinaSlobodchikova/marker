@@ -17,7 +17,7 @@ class testHelperSM:
 
     def find_region2(self, reg_name):
         wd = self.app.wd
-        self.app.wait_smBlock(120)
+        self.app.wait_smBlock(600)
         wd.find_element_by_xpath("//div[@id='aggregatesPlaceholder']/table/tbody/tr/td[2]/div/div/div[1]/span[2]").click()
         wd.find_element_by_xpath("//div[@id='mCSB_6_container']/div/ul/li[20]/label").click()
         wd.find_element_by_id("aggSearchText").click()
@@ -29,13 +29,13 @@ class testHelperSM:
         wd.find_element_by_xpath("//div[@id='mCSB_7_container']/div/ul/li[6]/label").click()
         wd.find_element_by_xpath("//div[@id='mCSB_7_container']/div/ul/li[7]/label").click()
         wd.find_element_by_xpath("//div[@id='mainAggDlgContent']//button[.='Применить фильтр']").click()
-        self.app.wait_smBlock(20)
-        wd.find_element_by_xpath("//form[@id='frmSearch']//button[.='Поиск']").click()
+        self.app.wait_smBlock(600)
+        self.press_search_button()
 
 
     def find_region3(self):
         wd = self.app.wd
-        self.app.wait_smBlock(120)
+        self.app.wait_smBlock(600)
         i = randrange(24)
         wd.find_element_by_xpath("//div[@id='aggregatesPlaceholder']/table/tbody/tr[2]/td[1]/div/div/div[1]/span[2]").click()
         self.app.wait_sm_artefact_Block(10)
@@ -48,11 +48,11 @@ class testHelperSM:
             wd.find_element_by_xpath("//div[@id='mCSB_11_container']/div/ul/li[%s]/label" % i).click()
         wd.find_element_by_xpath("//div[@id='mainAggDlgContent']//button[.='Применить фильтр']").click()
         self.app.wait_smBlock(20)
-        wd.find_element_by_xpath("//form[@id='frmSearch']//button[.='Поиск']").click()
+        self.press_search_button()
 
     def find_in_container_number(self, range_container_numbers, container_number):
         wd = self.app.wd
-        self.app.wait_smBlock(120)
+        self.app.wait_smBlock(600)
         spicok = []
         i = randrange(1, 4, 1)
         if container_number == 0:
@@ -95,8 +95,12 @@ class testHelperSM:
         else:
             i = 2
             wd.find_element_by_xpath("//div[@id='mCSB_2_container']/ul/li[%s]/label" % str(i)).click()
-        wd.find_element_by_xpath("//form[@id='frmSearch']//button[.='Поиск']").click()
+        self.press_search_button()
         return i, ct
+
+    def press_search_button(self):
+        wd = self.app.wd
+        wd.find_element_by_xpath("//form[@id='frmSearch']//button[.='Поиск']").click()
 
     def is_sm_advSearch_is_displayed(self):
         try:
@@ -108,7 +112,7 @@ class testHelperSM:
 
     def find_zakazchik_for_purchases_list(self):
         wd = self.app.wd
-        self.app.wait_smBlock(120)
+        self.app.wait_smBlock(600)
         i = randrange(24)
         wd.find_element_by_xpath(
             "//div[@id='aggregatesPlaceholder']/table/tbody/tr[1]/td[3]/div[2]/div/div[1]/span[2]").click()
@@ -124,26 +128,51 @@ class testHelperSM:
             i = 2
             wd.find_element_by_xpath("//div[@id='mCSB_12_container']/div/ul/li[%s]/label" % i).click()
         wd.find_element_by_xpath("//div[@id='mainAggDlgContent']//button[.='Применить фильтр']").click()
-        self.app.wait_smBlock(20)
-        wd.find_element_by_xpath("//form[@id='frmSearch']//button[.='Поиск']").click()
+        self.app.wait_smBlock(600)
+        self.press_search_button()
 
 
-    def get_artef_list(self, ct):
+# ! not work
+    def search_in_opened_container(self):
         wd = self.app.wd
-        rows = []
-        index = -1
-        for row in wd.find_elements_by_xpath("//div[@id='mCSB_%s_container']/ul/li" % ct):
-            index = index + 1
+        self.app.wait_smBlock(600)
+        if not self.is_sm_advSearch_is_displayed():
+            if len(wd.find_elements_by_xpath("//div[@class='block-label']//a[.='Показать/скрыть']")) < 2:
+                wd.find_element_by_xpath("//div[@class='block-label']//a[.='Показать/скрыть']").click()
+            else:
+                wd.find_element_by_xpath("//div[@id='advSearch']/div[2]/a").click()
+        i = randrange(1, 24, 1)
+        c = len(wd.find_elements_by_css_selector("span.agg-widget_btn"))
+        ct = randrange(c)
+        wd.find_elements_by_css_selector("span.agg-widget_btn")[ct].click()
+        self.app.wait_sm_artefact_Block(10)
+        #найти как кликнуть на элементе
+
+        wd.find_element_by_xpath("//div[@id='mainAggDlgContent']//button[.='Применить фильтр']").click()
+        self.app.wait_smBlock(600)
+        self.press_search_button()
+
+
+
+
+    def get_artef_parametrs(self, ct):
+        wd = self.app.wd
+        self.app.wait_smBlock(600)
+        for row in wd.find_elements_by_xpath("//div[@id='mCSB_%s_container']/ul/li[1]" % ct):
+
             cells = row.find_elements_by_tag_name("span")
             results = cells[0].find_element_by_tag_name("em").text
-            parametr = cells[3].text
-            return row[index, parametr, results]
-        return
+            try:
+                parametr = cells[3].text
+            except:
+                parametr = cells[2].text
+            return parametr
 
-    def get_artef_param_by_index(self, index, ct):
+
+    def get_artef_param(self, ct):
         wd = self.app.wd
-        list = self.get_artef_list(ct)
-        return list[index]
+        param = self.get_artef_parametrs(ct)
+        return param
 
     def is_smresult_not_0(self):
         try:
@@ -154,7 +183,7 @@ class testHelperSM:
             return False
 
     def check_results(self):
-        self.app.wait_smBlock(120)
+        self.app.wait_smBlock(900)
         if self.is_smresult_not_0():
             result = self.get_total_results()
             return result
@@ -173,7 +202,7 @@ class testHelperSM:
     def create_contact_report_all_in_dif_row_tel_mail(self):
         wd = self.app.wd
         wd.maximize_window()
-        self.app.wait_smBlock(60)
+        self.app.wait_smBlock(600)
         wd.find_element_by_xpath("//div[@class='panel_header']//p[.='Контакты']").click()
         self.app.wait_sm_artefact_Block(10)
         wd.find_element_by_xpath("//label[@for='cb-3']").click()
@@ -187,7 +216,7 @@ class testHelperSM:
     def create_contact_report_all_in_dif_row_tel_mail_zakazchiki(self):
         wd = self.app.wd
         wd.maximize_window()
-        self.app.wait_smBlock(60)
+        self.app.wait_smBlock(600)
         wd.find_element_by_xpath("//div[@class='panel_header']//p[.='Контакты']").click()
         self.app.wait_sm_artefact_Block(10)
         wd.find_element_by_xpath("//label[@for='cb-3']").click()
@@ -206,7 +235,7 @@ class testHelperSM:
 
     def create_contact_report_allinone_tel_mail(self):
         wd = self.app.wd
-        self.app.wait_smBlock(60)
+        self.app.wait_smBlock(600)
         wd.find_element_by_xpath("//div[@class='panel_header']//p[.='Контакты']").click()
         self.app.wait_sm_artefact_Block(10)
         wd.find_element_by_xpath("//label[@for='cb-3']").click()
@@ -219,7 +248,7 @@ class testHelperSM:
 
     def create_contact_report_allinone_tel_mail_zakazchiki(self):
         wd = self.app.wd
-        self.app.wait_smBlock(60)
+        self.app.wait_smBlock(600)
         wd.find_element_by_xpath("//div[@class='panel_header']//p[.='Контакты']").click()
         self.app.wait_sm_artefact_Block(10)
         wd.find_element_by_xpath("//label[@for='cb-3']").click()
@@ -238,7 +267,7 @@ class testHelperSM:
 
     def create_contact_report_result(self):
         wd = self.app.wd
-        self.app.wait_smBlock(20)
+        self.app.wait_smBlock(600)
         wd.find_element_by_xpath("//div[@class='panel_header']//p[.='Результаты']").click()
         self.app.wait_sm_artefact_Block(10)
         wd.find_element_by_xpath("//div[@id='divReportSearchResultsSettings']//button[.='Сформировать']").click()
@@ -246,14 +275,14 @@ class testHelperSM:
     def create_contact_report_statictic(self):
         wd = self.app.wd
         #добавить выбор чекбоксов
-        self.app.wait_smBlock(20)
+        self.app.wait_smBlock(600)
         wd.find_element_by_xpath("//div[@class='panel_header']//p[.='Статистика']").click()
         self.app.wait_sm_artefact_Block(10)
         wd.find_element_by_xpath("//div[@id='divReportStatisticsSettings']//button[.='Сформировать']").click()
 
     def create_contact_list_10000(self, cd2, text):
         wd = self.app.wd
-        self.app.wait_smBlock(20)
+        self.app.wait_smBlock(900)
         wd.find_element_by_xpath("//li[@id='UpdateList']//p[.='Добавить']").click()
         wd.find_element_by_xpath("//label[@for='sallResults']").click()
         if not wd.find_element_by_id("sallResults").is_selected():
@@ -262,12 +291,13 @@ class testHelperSM:
         wd.find_element_by_xpath("//input[@class='ui-autocomplete-input']").clear()
         wd.find_element_by_xpath("//input[@class='ui-autocomplete-input']").send_keys(text % cd2)
         time.sleep(2)
+        wd.find_element_by_xpath("//input[@class='ui-autocomplete-input']").click()
         wd.find_element_by_xpath("//div[@id='addOrUpdateEntitiesListSearchDlg']//button[.='Сохранить']").click()
 
 
     def create_purchases_company_list_50(self, cd2, text):
         wd = self.app.wd
-        self.app.wait_smBlock(120)
+        self.app.wait_smBlock(900)
         #выбор 50
         self.select_all_50()
         #создание первых списка по первым 50 компаниям
@@ -280,6 +310,7 @@ class testHelperSM:
         wd.find_element_by_xpath("//input[@class='ui-autocomplete-input']").click()
         wd.find_element_by_xpath("//input[@class='ui-autocomplete-input']").send_keys(text % cd2)
         time.sleep(2)
+        wd.find_element_by_xpath("//input[@class='ui-autocomplete-input']").click()
         wd.find_element_by_xpath("//div[@id='addOrUpdateEntitiesListSearchDlg']//button[.='Сохранить']").click()
 
     def select_all_50(self):
@@ -300,7 +331,7 @@ class testHelperSM:
 
     def report_is_present_short(self, reestr_ex, report_type_ex, state_ex):
         wd = self.app.wd
-        self.app.wait_smBlock(120)
+        self.app.wait_smBlock(600)
         reestr = wd.find_element_by_xpath("//div[@id='reports']/div[3]/table/tbody/tr[1]/td[3]").text.rstrip()
         report_type = wd.find_element_by_xpath("//div[@id='reports']/div[3]/table/tbody/tr[1]/td[4]").text.rstrip()
         state = wd.find_element_by_xpath("//div[@id='reports']/div[3]/table/tbody/tr[1]/td[5]").text.rstrip()
@@ -325,26 +356,34 @@ class testHelperSM:
     def monitoring_is_present(self, cd2, cd3, text, reestr_ex):
         wd = self.app.wd
         wd.refresh()
-        self.app.wait_smBlock(60)
+        self.app.wait_smBlock(600)
         date = wd.find_element_by_xpath("//div[@class='panel_layer']/div[2]/table/tbody/tr[1]/td[2]").text.rstrip()
         exp_date = "Сегодня " + cd3
         cd2_hour = cd3[0:2]
         cd2_minute = cd3[3:5]
         exp_name = text[0:-3] + " " + cd2
         exp_date2 = "Сегодня " + cd2_hour + ":" + str(int(cd2_minute) + 1)
+        exp_date3 = "Сегодня " + cd2_hour + ":" + "0" + str(int(cd2_minute) + 1)
         reestr = wd.find_element_by_xpath("//div[@class='panel_layer']/div[2]/table/tbody/tr[1]/td[3]").text.rstrip()
         name = wd.find_element_by_xpath("//div[@class='panel_layer']//a[.='%s']" % exp_name).text.rstrip()
         #name = wd.find_element_by_xpath("//div[@class='panel_layer']/div[2]/table/tbody/tr[1]/td[4]").text.rstrip()
-        if date == exp_date or date == exp_date2:
+        if date == exp_date or date == exp_date2 or date == exp_date3:
             if reestr == reestr_ex:
                 if name == exp_name:
                     return True
         return False
 
+    def click_on_monitoring_link(self, cd2, text):
+        wd = self.app.wd
+        self.app.wait_smBlock(600)
+        exp_name = text[0:-3] + " " + cd2
+        wd.find_element_by_xpath("//div[@class='panel_layer']//a[.='%s']" % exp_name).click()
+
+
     def contact_or_purchases_list_is_present(self, cd2, text):
         wd = self.app.wd
         #проверить время
-        self.app.wait_smBlock(120)
+        self.app.wait_smBlock(600)
         cd_contact_list = wd.find_element_by_xpath("//div[@class='panel_layer']/div[2]/table/tbody/tr[1]/td[2]").text.rstrip()
         current_name = wd.find_element_by_xpath("//div[@class='panel_layer']/div[2]/table/tbody/tr[1]/td[3]").text.rstrip()
         created_name = text[0:-3] + " " + cd2
@@ -372,10 +411,6 @@ class testHelperSM:
         else:
             return False
 
-        #открыть (нужен метод принимающий название)
-
-        #проверить заголовок
-
     def ensure_link_work(self):
         wd = self.app.wd
         header = wd.find_element_by_css_selector("h1.clip").text
@@ -386,42 +421,27 @@ class testHelperSM:
         header = wd.find_element_by_css_selector("h2").text
         return header[0:8]
 
-    def delete_first_contact_list(self):
-        wd = self.app.wd
-        self.app.wait_smBlock(20)
-        #придумать как найти чекбокс внизу чушь
-        list = []
-        #for row in wd.find_element_by_xpath("//input[@class='row-cb']"):
-        #    cells = row.find_elements_by_tag_name("td")
-        #    id = cells[0].find_element_by_tag_name("input").get_attribute("data-id")
-        wd.find_element_by_xpath("//div[@class='panel_layer']/div[2]/table/tbody/tr[1]/td[1]").click()
-        if not wd.find_elements_by_xpath("//div[@class='panel_layer']/div[2]/table/tbody/tr[1]/td[1]").is_selected():
-            wd.find_element_by_xpath("//div[@class='panel_layer']/div[2]/table/tbody/tr[1]/td[1]").click()
-
-        wd.find_element_by_id("btnDel").click()
-        wd.find_element_by_xpath("//div[@id='dlgYesNo']//button[.='Да']").click()
-
     def open_first_contact_list(self):
         wd = self.app.wd
-        self.app.wait_smBlock(20)
+        self.app.wait_smBlock(600)
         wd.find_element_by_xpath("//div[@class='panel_layer']/div[2]/table/tbody/tr[1]/td[3]/div/div[1]/a").click()
 
     def create_report_covladeltsy(self):
         wd = self.app.wd
-        self.app.wait_smBlock(120)
+        self.app.wait_smBlock(600)
         wd.find_element_by_xpath("//div[@class='panel_header']//p[.='Совладельцы']").click()
         wd.find_element_by_xpath("//div[@id='divReportCoownersSettings']//button[.='Сформировать']").click()
         wd.find_element_by_css_selector("div.toast-title").click()
 
     def create_report_affelir(self):
         wd = self.app.wd
-        self.app.wait_smBlock(120)
+        self.app.wait_smBlock(600)
         wd.find_element_by_xpath("//div[@class='panel_header']//p[.='Аффилированность']").click()
         wd.find_element_by_xpath("//div[@id='divReportAffilationSettings']//button[.='Сформировать']").click()
 
     def create_report_prices_zakazchik(self):
         wd = self.app.wd
-        self.app.wait_smBlock(120)
+        self.app.wait_smBlock(600)
         wd.find_element_by_xpath("//div[@class='panel_header']//p[.='Цены']").click()
         wd.find_element_by_xpath("//label[@for='rb-0']").click()
         if not wd.find_element_by_id("rb-0").is_selected():
@@ -439,7 +459,7 @@ class testHelperSM:
 
     def create_report_prices_postavschik(self):
         wd = self.app.wd
-        self.app.wait_smBlock(120)
+        self.app.wait_smBlock(600)
         wd.find_element_by_xpath("//div[@class='panel_header']//p[.='Цены']").click()
         wd.find_element_by_xpath("//label[@for='rb-1']").click()
         if not wd.find_element_by_id("rb-1").is_selected():
@@ -454,32 +474,46 @@ class testHelperSM:
 
     def create_report_rnpSuppliers(self):
         wd = self.app.wd
-        self.app.wait_smBlock(120)
+        self.app.wait_smBlock(600)
         wd.find_element_by_xpath("//div[@class='panel_header']//p[.='Поставщик в РНП']").click()
         wd.find_element_by_xpath("//div[@id='divRnpSuppliersSettings']//button[.='Сформировать']").click()
 
     def create_report_RnpParticipantsSettings(self):
         wd = self.app.wd
-        self.app.wait_smBlock(120)
+        self.app.wait_smBlock(600)
         wd.find_element_by_xpath("//div[@class='panel_header']//p[.='Участник в РНП']").click()
         wd.find_element_by_xpath("//div[@id='divRnpParticipantsSettings']//button[.='Сформировать']").click()
 
     def create_report_FasComplaintsSettings(self):
         wd = self.app.wd
-        self.app.wait_smBlock(120)
+        self.app.wait_smBlock(600)
         wd.find_element_by_xpath("//div[@class='panel_header']//p[.='ФАС']").click()
         wd.find_element_by_xpath("//div[@id='divFasComplaintsSettings']//button[.='Сформировать']").click()
 
     def save_requesr(self, cd2, text):
         wd = self.app.wd
-        self.app.wait_smBlock(120)
-        wd.find_element_by_link_text("Сохранить запрос").click()
+        self.app.wait_smBlock(600)
+        try:
+            wd.find_element_by_link_text("Сохранить запрос").click()
+        except:
+            try:
+                wd.find_element_by_link_text("Сохранить запрос/Мониторинг").click()
+            except:
+                try:
+                    wd.find_element_by_link_text("Сохранить запрос ").click()
+                except:
+                    wd.find_element_by_link_text("Сохранить запрос/Мониторинг ").click()
         wd.find_element_by_id("requestName").click()
         wd.find_element_by_id("requestName").clear()
         wd.find_element_by_id("requestName").send_keys(text % cd2)
         time.sleep(2)
+        wd.find_element_by_id("requestName").click()
         wd.find_element_by_xpath("//div[@id='divSaveRequest']//button[.='Сохранить']").click()
 
+    def refresh_page(self):
+        wd = self.app.wd
+        wd.refresh()
+        self.app.wait_smBlock(600)
 
 
 
@@ -492,5 +526,20 @@ class testHelperSM:
 
     def delete_report(self):
         pass
+
+    def delete_first_contact_list(self):
+        wd = self.app.wd
+        self.app.wait_smBlock(600)
+        #придумать как найти чекбокс, внизу чушь
+        list = []
+        #for row in wd.find_element_by_xpath("//input[@class='row-cb']"):
+        #    cells = row.find_elements_by_tag_name("td")
+        #    id = cells[0].find_element_by_tag_name("input").get_attribute("data-id")
+        wd.find_element_by_xpath("//div[@class='panel_layer']/div[2]/table/tbody/tr[1]/td[1]").click()
+        if not wd.find_elements_by_xpath("//div[@class='panel_layer']/div[2]/table/tbody/tr[1]/td[1]").is_selected():
+            wd.find_element_by_xpath("//div[@class='panel_layer']/div[2]/table/tbody/tr[1]/td[1]").click()
+
+        wd.find_element_by_id("btnDel").click()
+        wd.find_element_by_xpath("//div[@id='dlgYesNo']//button[.='Да']").click()
 
 

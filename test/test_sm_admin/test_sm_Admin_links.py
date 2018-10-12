@@ -46,6 +46,7 @@
 
 
 def test_sm_link_smAdminUpravlenie(app):
+    app.session.open_SM_page(app.smAdminUpravlenie)
     app.session.ensure_login_sm(app.username, app.password)
     app.session.ensure_login_sm(app.username, app.password)
     app.session.open_SM_page(app.smAdminUpravlenie)
@@ -54,36 +55,42 @@ def test_sm_link_smAdminUpravlenie(app):
 
 def test_sm_link_smAdminShlyuz(app):
     exp_result = "Пользователи"
+    app.session.open_SM_page(app.smAdminShlyuz)
     app.session.ensure_login_sm(app.username, app.password)
     app.session.open_SM_page(app.smAdminShlyuz)
     assert (app.testhelpersm.ensure_link_work() == exp_result)
 
 def test_sm_link_smAdminAccessManager(app):
     exp_result = "Пользователи"
+    app.session.open_SM_page(app.smAdminAccessManager)
     app.session.ensure_login_sm(app.username, app.password)
     app.session.open_SM_page(app.smAdminAccessManager)
     assert (app.testhelpersm.ensure_link_work() == exp_result)
 
 def test_sm_link_smAdminInstructions(app):
     exp_result = "Редактирование инструкций"
+    app.session.open_SM_page(app.smAdminInstructions)
     app.session.ensure_login_sm(app.username, app.password)
     app.session.open_SM_page(app.smAdminInstructions)
     assert (app.testhelpersm.ensure_link_work() == exp_result)
 
 def test_sm_link_smAdminNotifications(app):
     exp_result = "Редактирование уведомлений"
+    app.session.open_SM_page(app.smAdminNotifications)
     app.session.ensure_login_sm(app.username, app.password)
     app.session.open_SM_page(app.smAdminNotifications)
     assert (app.testhelpersm.ensure_link_work() == exp_result)
 
 def test_sm_link_smAdminNews(app):
     exp_result = "Редактирование новостей"
+    app.session.open_SM_page(app.smAdminNews)
     app.session.ensure_login_sm(app.username, app.password)
     app.session.open_SM_page(app.smAdminNews)
     assert (app.testhelpersm.ensure_link_work() == exp_result)
 
 def test_sm_link_smAdminSessions(app):
     exp_result = "Сессии пользователей"
+    app.session.open_SM_page(app.smAdminSessions)
     app.session.ensure_login_sm(app.username, app.password)
     app.session.open_SM_page(app.smAdminSessions)
     assert (app.testhelpersm.ensure_link_work() == exp_result)

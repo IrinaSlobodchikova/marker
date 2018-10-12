@@ -3,6 +3,8 @@
 def test_sm_create_contact_list(app):
     i = "Перейти в списки компаний"
     text = "список компаний %s"
+    app.testhelpersm.refresh_page()
+    app.session.open_SM_page(app.smParticipantsCustomers)
     app.session.ensure_login_sm(app.username, app.password)
     app.session.ensure_login_sm(app.username, app.password)
     app.session.open_SM_page(app.smParticipantsCustomers)

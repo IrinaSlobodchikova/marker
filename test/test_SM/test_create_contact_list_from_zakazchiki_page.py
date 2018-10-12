@@ -4,16 +4,16 @@ def test_sm_create_contact_list(app):
     i = "Перейти в списки компаний"
     text = "список компаний %s"
     app.testhelpersm.refresh_page()
-    app.session.open_SM_page(app.smParticipants)
+    app.session.open_SM_page(app.smParticipantsCustomers)
     app.session.ensure_login_sm(app.username, app.password)
     app.session.ensure_login_sm(app.username, app.password)
-    app.session.open_SM_page(app.smParticipants)
-    app.testhelpersm.find_in_container_number(6, 0)
+    app.session.open_SM_page(app.smParticipantsCustomers)
+    app.testhelpersm.find_in_container_number(3, 0)
     if app.testhelpersm.check_results() == '0':
         tr = 1
         while app.testhelpersm.check_results() == '0' and tr < 20:
-            app.session.open_SM_page(app.smParticipants)
-            app.testhelpersm.find_in_container_number(6, 0)
+            app.session.open_SM_page(app.smParticipantsCustomers)
+            app.testhelpersm.find_in_container_number(3, 0)
             tr = tr + 1
     #app.testhelpersm.get_old_contact_list()
     cd2 = app.current_date_time().strftime('%d.%m.%Y %H:%M')

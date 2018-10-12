@@ -8,6 +8,8 @@ def test_sm_create_report_rnpSuppliers(app):
     state_ex = "Формируется"
     i2 = "Открыть отчеты"
     text = "список торгов %s"
+    app.testhelpersm.refresh_page()
+    app.session.open_SM_page(app.smPrices)
     app.session.ensure_login_sm(app.username, app.password)
     app.session.ensure_login_sm(app.username, app.password)
     app.session.open_SM_page(app.smPrices)
@@ -40,6 +42,8 @@ def test_sm_create_report_RnpParticipantsSettings(app):
     state_ex = "Формируется"
     i2 = "Открыть отчеты"
     text = "список торгов %s"
+    app.testhelpersm.refresh_page()
+    app.session.open_SM_page(app.smPrices)
     app.session.ensure_login_sm(app.username, app.password)
     app.session.ensure_login_sm(app.username, app.password)
     app.session.open_SM_page(app.smPrices)
@@ -72,6 +76,8 @@ def test_sm_create_report_FasComplaintsSettings(app):
     state_ex = "Формируется"
     i2 = "Открыть отчеты"
     text = "список торгов %s"
+    app.testhelpersm.refresh_page()
+    app.session.open_SM_page(app.smPrices)
     app.session.ensure_login_sm(app.username, app.password)
     app.session.ensure_login_sm(app.username, app.password)
     app.session.open_SM_page(app.smPrices)
@@ -104,6 +110,8 @@ def test_sm_create_report_contacts_from_purchases_list_all_in_one_row(app):
     state_ex = "Формируется"
     i2 = "Открыть отчеты"
     text = "список торгов %s"
+    app.testhelpersm.refresh_page()
+    app.session.open_SM_page(app.smPrices)
     app.session.ensure_login_sm(app.username, app.password)
     app.session.ensure_login_sm(app.username, app.password)
     app.session.open_SM_page(app.smPrices)
@@ -136,6 +144,8 @@ def test_sm_create_report_contacts_from_purchases_list_all_in_dif_row(app):
     state_ex = "Формируется"
     i2 = "Открыть отчеты"
     text = "список торгов %s"
+    app.testhelpersm.refresh_page()
+    app.session.open_SM_page(app.smPrices)
     app.session.ensure_login_sm(app.username, app.password)
     app.session.ensure_login_sm(app.username, app.password)
     app.session.open_SM_page(app.smPrices)
@@ -168,6 +178,8 @@ def test_sm_create_report_prices_zakazchik(app):
     state_ex = "Формируется"
     i2 = "Открыть отчеты"
     text = "список торгов %s"
+    app.testhelpersm.refresh_page()
+    app.session.open_SM_page(app.smPrices)
     app.session.ensure_login_sm(app.username, app.password)
     app.session.ensure_login_sm(app.username, app.password)
     app.session.open_SM_page(app.smPrices)
@@ -200,6 +212,8 @@ def test_sm_create_report_prices_postavschik(app):
     state_ex = "Формируется"
     i2 = "Открыть отчеты"
     text = "список торгов %s"
+    app.testhelpersm.refresh_page()
+    app.session.open_SM_page(app.smPrices)
     app.session.ensure_login_sm(app.username, app.password)
     app.session.ensure_login_sm(app.username, app.password)
     app.session.open_SM_page(app.smPrices)
@@ -232,6 +246,8 @@ def test_sm_create_report_search_result(app):
     state_ex = "Формируется"
     i2 = "Открыть отчеты"
     text = "список торгов %s"
+    app.testhelpersm.refresh_page()
+    app.session.open_SM_page(app.smPrices)
     app.session.ensure_login_sm(app.username, app.password)
     app.session.ensure_login_sm(app.username, app.password)
     app.session.open_SM_page(app.smPrices)

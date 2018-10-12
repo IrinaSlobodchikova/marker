@@ -11,7 +11,8 @@ import datetime
 
 class Application:
 
-    def __init__(self, browser, config, environment, check_report_result, baseUrlMarker, baseUrlSM, username, password, dashboard,
+    def __init__(self, browser, config, environment, check_report_result, baseUrlMarker, baseUrlSM, username, password,
+                 dashboard,
                  newtenders, participation, watch, market_potential, planned_purchases, company_list, solutions,
                  reports, smParticipants, smParticipantsCustomers, smParticipantsSuppliers, smPurchases, smPrices,
                  smCertificates, smLicences, smKontrol, smreports, smMonitorinds, smcompany_list, smPurchases_list,
@@ -97,7 +98,10 @@ class Application:
         wd.get(self.baseUrlSM)
         self.wait_smBlock(5)
 
-
+    def open_sm_admin_home_page(self):
+        wd = self.wd
+        wd.get(self.baseAdminUrlMarker)
+        self.wait_smBlock(5)
 
 
     def wait_smBlock(self, timeout):
