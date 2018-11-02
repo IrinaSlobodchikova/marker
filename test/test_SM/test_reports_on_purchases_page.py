@@ -10,12 +10,14 @@ def test_sm_create_contact_report_all_in_dif_row_tel_mail_postavchiki(app):
     app.session.ensure_login_sm(app.username, app.password)
     app.session.ensure_login_sm(app.username, app.password)
     app.session.open_SM_page(app.smPurchases)
-    app.testhelpersm.find_in_container_number(11, 0)
-    if app.testhelpersm.check_results() == '0':
+    # Искать в контейнере (всего контейнеров + 1, номер контейнера(если 0 - случайный выбор), номер строки
+    # в контейнере если 0 - случайный выбор)
+    app.testHelperSMSearch.find_in_container_number(11, 0, 0)
+    if app.testHelperSMSearch.check_results() == '0':
         tr = 1
-        while app.testhelpersm.check_results() == '0' and tr < 20:
+        while app.testHelperSMSearch.check_results() == '0' and tr < 20:
             app.session.open_SM_page(app.smPurchases)
-            app.testhelpersm.find_in_container_number(11, 0)
+            app.testHelperSMSearch.find_in_container_number(11, 0, 0)
             tr = tr + 1
     cd2 = app.current_date_time().strftime('%H:%M')
     app.testhelpersm.create_contact_report_all_in_dif_row_tel_mail()
@@ -39,12 +41,14 @@ def test_sm_create_contact_report_all_in_dif_row_tel_mail_zakazchiki(app):
     app.session.open_SM_page(app.smPurchases)
     app.session.ensure_login_sm(app.username, app.password)
     app.session.open_SM_page(app.smPurchases)
-    app.testhelpersm.find_in_container_number(11, 0)
-    if app.testhelpersm.check_results() == '0':
+    # Искать в контейнере (всего контейнеров + 1, номер контейнера(если 0 - случайный выбор), номер строки
+    # в контейнере если 0 - случайный выбор)
+    app.testHelperSMSearch.find_in_container_number(11, 0, 0)
+    if app.testHelperSMSearch.check_results() == '0':
         tr = 1
-        while app.testhelpersm.check_results() == '0' and tr < 20:
+        while app.testHelperSMSearch.check_results() == '0' and tr < 20:
             app.session.open_SM_page(app.smPurchases)
-            app.testhelpersm.find_in_container_number(11, 0)
+            app.testHelperSMSearch.find_in_container_number(11, 0, 0)
             tr = tr + 1
     cd2 = app.current_date_time().strftime('%H:%M')
     app.testhelpersm.create_contact_report_all_in_dif_row_tel_mail_zakazchiki()
@@ -68,12 +72,14 @@ def test_sm_create_contact_report_allinone_tel_mail_postavchiki(app):
     app.session.open_SM_page(app.smPurchases)
     app.session.ensure_login_sm(app.username, app.password)
     app.session.open_SM_page(app.smPurchases)
-    app.testhelpersm.find_in_container_number(11, 0)
-    if app.testhelpersm.check_results() == '0':
+    # Искать в контейнере (всего контейнеров + 1, номер контейнера(если 0 - случайный выбор), номер строки
+    # в контейнере если 0 - случайный выбор)
+    app.testHelperSMSearch.find_in_container_number(11, 0, 0)
+    if app.testHelperSMSearch.check_results() == '0':
         tr = 1
-        while app.testhelpersm.check_results() == '0' and tr < 20:
+        while app.testHelperSMSearch.check_results() == '0' and tr < 20:
             app.session.open_SM_page(app.smPurchases)
-            app.testhelpersm.find_in_container_number(11, 0)
+            app.testHelperSMSearch.find_in_container_number(11, 0, 0)
             tr = tr + 1
     cd2 = app.current_date_time().strftime('%H:%M')
     app.testhelpersm.create_contact_report_allinone_tel_mail()
@@ -96,12 +102,14 @@ def test_sm_create_contact_report_allinone_tel_mail_zakazchiki(app):
     app.session.open_SM_page(app.smPurchases)
     app.session.ensure_login_sm(app.username, app.password)
     app.session.open_SM_page(app.smPurchases)
-    app.testhelpersm.find_in_container_number(11, 0)
-    if app.testhelpersm.check_results() == '0':
+    # Искать в контейнере (всего контейнеров + 1, номер контейнера(если 0 - случайный выбор), номер строки
+    # в контейнере если 0 - случайный выбор)
+    app.testHelperSMSearch.find_in_container_number(11, 0, 0)
+    if app.testHelperSMSearch.check_results() == '0':
         tr = 1
-        while app.testhelpersm.check_results() == '0' and tr < 20:
+        while app.testHelperSMSearch.check_results() == '0' and tr < 20:
             app.session.open_SM_page(app.smPurchases)
-            app.testhelpersm.find_in_container_number(11, 0)
+            app.testHelperSMSearch.find_in_container_number(11, 0, 0)
             tr = tr + 1
     cd2 = app.current_date_time().strftime('%H:%M')
     app.testhelpersm.create_contact_report_allinone_tel_mail_zakazchiki()
@@ -123,12 +131,14 @@ def test_sm_create_purchases_report_result(app):
     app.session.open_SM_page(app.smPurchases)
     app.session.ensure_login_sm(app.username, app.password)
     app.session.open_SM_page(app.smPurchases)
-    app.testhelpersm.find_in_container_number(11, 0)
-    if app.testhelpersm.check_results() == '0':
+    # Искать в контейнере (всего контейнеров + 1, номер контейнера(если 0 - случайный выбор), номер строки
+    # в контейнере если 0 - случайный выбор)
+    app.testHelperSMSearch.find_in_container_number(11, 0, 0)
+    if app.testHelperSMSearch.check_results() == '0':
         tr = 1
-        while app.testhelpersm.check_results() == '0' and tr < 20:
+        while app.testHelperSMSearch.check_results() == '0' and tr < 20:
             app.session.open_SM_page(app.smPurchases)
-            app.testhelpersm.find_in_container_number(11, 0)
+            app.testHelperSMSearch.find_in_container_number(11, 0, 0)
             tr = tr + 1
     cd2 = app.current_date_time().strftime('%H:%M')
     app.testhelpersm.create_contact_report_result()
@@ -151,12 +161,14 @@ def test_sm_purchases_contact_report_statictic(app):
     app.session.open_SM_page(app.smPurchases)
     app.session.ensure_login_sm(app.username, app.password)
     app.session.open_SM_page(app.smPurchases)
-    app.testhelpersm.find_in_container_number(11, 0)
-    if app.testhelpersm.check_results() == '0':
+    # Искать в контейнере (всего контейнеров + 1, номер контейнера(если 0 - случайный выбор), номер строки
+    # в контейнере если 0 - случайный выбор)
+    app.testHelperSMSearch.find_in_container_number(11, 0, 0)
+    if app.testHelperSMSearch.check_results() == '0':
         tr = 1
         while app.testhelpersm.check_results() == '0' and tr < 20:
             app.session.open_SM_page(app.smPurchases)
-            app.testhelpersm.find_in_container_number(11, 0)
+            app.testHelperSMSearch.find_in_container_number(11, 0, 0)
             tr = tr + 1
     cd2 = app.current_date_time().strftime('%H:%M')
     app.testhelpersm.create_contact_report_statictic()
@@ -178,12 +190,14 @@ def test_sm_purchases_contact_report_Prices_zakazchik(app):
     app.session.open_SM_page(app.smPurchases)
     app.session.ensure_login_sm(app.username, app.password)
     app.session.open_SM_page(app.smPurchases)
-    app.testhelpersm.find_in_container_number(11, 0)
-    if app.testhelpersm.check_results() == '0':
+    # Искать в контейнере (всего контейнеров + 1, номер контейнера(если 0 - случайный выбор), номер строки
+    # в контейнере если 0 - случайный выбор)
+    app.testHelperSMSearch.find_in_container_number(11, 0, 0)
+    if app.testHelperSMSearch.check_results() == '0':
         tr = 1
-        while app.testhelpersm.check_results() == '0' and tr < 20:
+        while app.testHelperSMSearch.check_results() == '0' and tr < 20:
             app.session.open_SM_page(app.smPurchases)
-            app.testhelpersm.find_in_container_number(11, 0)
+            app.testHelperSMSearch.find_in_container_number(11, 0, 0)
             tr = tr + 1
     cd2 = app.current_date_time().strftime('%H:%M')
     app.testhelpersm.create_report_prices_zakazchik()
@@ -205,12 +219,14 @@ def test_sm_purchases_contact_report_Prices_postavschik(app):
     app.session.open_SM_page(app.smPurchases)
     app.session.ensure_login_sm(app.username, app.password)
     app.session.open_SM_page(app.smPurchases)
-    app.testhelpersm.find_in_container_number(11, 0)
-    if app.testhelpersm.check_results() == '0':
+    # Искать в контейнере (всего контейнеров + 1, номер контейнера(если 0 - случайный выбор), номер строки
+    # в контейнере если 0 - случайный выбор)
+    app.testHelperSMSearch.find_in_container_number(11, 0, 0)
+    if app.testHelperSMSearch.check_results() == '0':
         tr = 1
-        while app.testhelpersm.check_results() == '0' and tr < 20:
+        while app.testHelperSMSearch.check_results() == '0' and tr < 20:
             app.session.open_SM_page(app.smPurchases)
-            app.testhelpersm.find_in_container_number(11, 0)
+            app.testHelperSMSearch.find_in_container_number(11, 0, 0)
             tr = tr + 1
     cd2 = app.current_date_time().strftime('%H:%M')
     app.testhelpersm.create_report_prices_postavschik()

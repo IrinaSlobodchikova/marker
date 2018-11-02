@@ -2,6 +2,7 @@ from selenium import webdriver
 from fixture.session import SessionHelper
 from fixture.testhelpermarker import testHelperMarker
 from fixture.testhelpersm import testHelperSM
+from fixture.testhelpersm_search import testHelperSMSearch
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
@@ -32,6 +33,7 @@ class Application:
         self.session = SessionHelper(self)
         self.testhelper = testHelperMarker(self)
         self.testhelpersm = testHelperSM(self)
+        self.testHelperSMSearch = testHelperSMSearch(self)
         self.text_to_change = text_to_change
         self.config = config
         self.environment = environment
@@ -77,7 +79,7 @@ class Application:
         self.adminfind_users = adminfind_users
         self.adminfind_publication = adminfind_publication
         self.adminnews = adminnews
-        self.wd.implicitly_wait(10)
+        self.wd.implicitly_wait(5)
 
     def is_valid(self):
         try:

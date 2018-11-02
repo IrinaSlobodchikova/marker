@@ -10,193 +10,193 @@ class testHelperSM:
         self.app = app
 
 
-    def find_region(self):
-        wd = self.app.wd
-        wd.find_element_by_xpath("//div[@id='mCSB_2_container']/ul/li[2]/label")
-        wd.find_element_by_xpath("//form[@id='frmSearch']//button[.='Поиск']")
+#    def find_region(self):
+#        wd = self.app.wd
+#        wd.find_element_by_xpath("//div[@id='mCSB_2_container']/ul/li[2]/label")
+#        wd.find_element_by_xpath("//form[@id='frmSearch']//button[.='Поиск']")
 
-    def find_region2(self, reg_name):
-        wd = self.app.wd
-        self.app.wait_smBlock(600)
-        wd.find_element_by_xpath("//div[@id='aggregatesPlaceholder']/table/tbody/tr/td[2]/div/div/div[1]/span[2]").click()
-        wd.find_element_by_xpath("//div[@id='mCSB_6_container']/div/ul/li[20]/label").click()
-        wd.find_element_by_id("aggSearchText").click()
-        wd.find_element_by_id("aggSearchText").clear()
-        wd.find_element_by_id("aggSearchText").send_keys("%s" % reg_name)
-        wd.find_element_by_id("aggSearch").click()
-        wd.find_element_by_xpath("//div[@id='mCSB_7_container']/div/ul/li[6]/label").click()
-        wd.find_element_by_xpath("//div[@id='mCSB_7_container']/div/ul/li[6]/span[3]").click()
-        wd.find_element_by_xpath("//div[@id='mCSB_7_container']/div/ul/li[6]/label").click()
-        wd.find_element_by_xpath("//div[@id='mCSB_7_container']/div/ul/li[7]/label").click()
-        wd.find_element_by_xpath("//div[@id='mainAggDlgContent']//button[.='Применить фильтр']").click()
-        self.app.wait_smBlock(600)
-        self.press_search_button()
+#    def find_region2(self, reg_name):
+#        wd = self.app.wd
+#        self.app.wait_smBlock(600)
+#        wd.find_element_by_xpath("//div[@id='aggregatesPlaceholder']/table/tbody/tr/td[2]/div/div/div[1]/span[2]").click()
+#        wd.find_element_by_xpath("//div[@id='mCSB_6_container']/div/ul/li[20]/label").click()
+#        wd.find_element_by_id("aggSearchText").click()
+#        wd.find_element_by_id("aggSearchText").clear()
+#        wd.find_element_by_id("aggSearchText").send_keys("%s" % reg_name)
+#        wd.find_element_by_id("aggSearch").click()
+#        wd.find_element_by_xpath("//div[@id='mCSB_7_container']/div/ul/li[6]/label").click()
+#        wd.find_element_by_xpath("//div[@id='mCSB_7_container']/div/ul/li[6]/span[3]").click()
+#        wd.find_element_by_xpath("//div[@id='mCSB_7_container']/div/ul/li[6]/label").click()
+#        wd.find_element_by_xpath("//div[@id='mCSB_7_container']/div/ul/li[7]/label").click()
+#        wd.find_element_by_xpath("//div[@id='mainAggDlgContent']//button[.='Применить фильтр']").click()
+#        self.app.wait_smBlock(600)
+#        self.press_search_button()
 
 
-    def find_region3(self):
-        wd = self.app.wd
-        self.app.wait_smBlock(600)
-        i = randrange(24)
-        wd.find_element_by_xpath("//div[@id='aggregatesPlaceholder']/table/tbody/tr[2]/td[1]/div/div/div[1]/span[2]").click()
-        self.app.wait_sm_artefact_Block(10)
-        if i > 0:
+#    def find_region3(self):
+#        wd = self.app.wd
+#        self.app.wait_smBlock(600)
+#        i = randrange(24)
+#        wd.find_element_by_xpath("//div[@id='aggregatesPlaceholder']/table/tbody/tr[2]/td[1]/div/div/div[1]/span[2]").click()
+#        self.app.wait_sm_artefact_Block(10)
+#        if i > 0:
             #element = wd.find_element_by_xpath("//div[@id='mCSB_11_container']/div/ul/li[%s]/label" % i)
             #ActionChains(wd).move_to_element(element).perform()
-            wd.find_element_by_xpath("//div[@id='mCSB_11_container']/div/ul/li[%s]/label" % i).click()
-        else:
-            i = 2
-            wd.find_element_by_xpath("//div[@id='mCSB_11_container']/div/ul/li[%s]/label" % i).click()
-        wd.find_element_by_xpath("//div[@id='mainAggDlgContent']//button[.='Применить фильтр']").click()
-        self.app.wait_smBlock(20)
-        self.press_search_button()
+#            wd.find_element_by_xpath("//div[@id='mCSB_11_container']/div/ul/li[%s]/label" % i).click()
+#        else:
+#            i = 2
+#            wd.find_element_by_xpath("//div[@id='mCSB_11_container']/div/ul/li[%s]/label" % i).click()
+#        wd.find_element_by_xpath("//div[@id='mainAggDlgContent']//button[.='Применить фильтр']").click()
+#        self.app.wait_smBlock(20)
+#        self.press_search_button()
 
-    def find_in_container_number(self, range_container_numbers, container_number):
-        wd = self.app.wd
-        self.app.wait_smBlock(600)
-        spicok = []
-        i = randrange(1, 4, 1)
-        if container_number == 0:
-            ct = randrange(1, range_container_numbers, 1)
-        else:
-            ct = container_number
-        if not self.is_sm_advSearch_is_displayed():
-            if len(wd.find_elements_by_xpath("//div[@class='block-label']//a[.='Показать/скрыть']")) < 2:
-                wd.find_element_by_xpath("//div[@class='block-label']//a[.='Показать/скрыть']").click()
-            else:
-                wd.find_element_by_xpath("//div[@id='advSearch']/div[2]/a").click()
-        if i > 0 and ct > 0:
-            if ct == 1:
-                if i < 3:
-                    wd.find_element_by_xpath("//div[@id='mCSB_1_container']/ul/li[%s]/label" % str(i)).click()
-                if i == 3:
-                    i = 2
-                    wd.find_element_by_xpath("//div[@id='mCSB_1_container']/ul/li[%s]/label" % str(i)).click()
-            elif ct == 2:
-                try:
-                    wd.find_element_by_xpath("//div[@id='mCSB_2_container']/ul/li[%s]/label" % str(i)).click()
-                except:
-                    wd.find_element_by_xpath("//div[@id='mCSB_1_container']/ul/li[%s]/label" % str(i)).click()
-            elif ct == 3:
-                wd.find_element_by_xpath("//div[@id='mCSB_3_container']/ul/li[%s]/label" % str(i)).click()
-            elif ct == 4:
-                wd.find_element_by_xpath("//div[@id='mCSB_4_container']/ul/li[%s]/label" % str(i)).click()
-            elif ct == 5:
-                wd.find_element_by_xpath("//div[@id='mCSB_5_container']/ul/li[%s]/label" % str(i)).click()
-            elif ct == 6:
-                wd.find_element_by_xpath("//div[@id='mCSB_6_container']/ul/li[%s]/label" % str(i)).click()
-            elif ct == 7:
-                    wd.find_element_by_xpath("//div[@id='mCSB_7_container']/ul/li[%s]/label" % str(i)).click()
-            elif ct == 8:
-                    wd.find_element_by_xpath("//div[@id='mCSB_8_container']/ul/li[%s]/label" % str(i)).click()
-            elif ct == 9:
-                    wd.find_element_by_xpath("//div[@id='mCSB_9_container']/ul/li[%s]/label" % str(i)).click()
-            elif ct == 10:
-                    wd.find_element_by_xpath("//div[@id='mCSB_10_container']/ul/li[%s]/label" % str(i)).click()
-        else:
-            i = 2
-            wd.find_element_by_xpath("//div[@id='mCSB_2_container']/ul/li[%s]/label" % str(i)).click()
-        self.press_search_button()
-        return i, ct
+#    def find_in_container_number(self, range_container_numbers, container_number):
+#        wd = self.app.wd
+#        self.app.wait_smBlock(600)
+#        spicok = []
+#        i = randrange(1, 4, 1)
+#        if container_number == 0:
+#            ct = randrange(1, range_container_numbers, 1)
+#        else:
+#            ct = container_number
+#        if not self.is_sm_advSearch_is_displayed():
+#            if len(wd.find_elements_by_xpath("//div[@class='block-label']//a[.='Показать/скрыть']")) < 2:
+#                wd.find_element_by_xpath("//div[@class='block-label']//a[.='Показать/скрыть']").click()
+#            else:
+#                wd.find_element_by_xpath("//div[@id='advSearch']/div[2]/a").click()
+#        if i > 0 and ct > 0:
+#            if ct == 1:
+#                if i < 3:
+#                    wd.find_element_by_xpath("//div[@id='mCSB_1_container']/ul/li[%s]/label" % str(i)).click()
+#                if i == 3:
+#                    i = 2
+#                    wd.find_element_by_xpath("//div[@id='mCSB_1_container']/ul/li[%s]/label" % str(i)).click()
+#            elif ct == 2:
+#                try:
+#                    wd.find_element_by_xpath("//div[@id='mCSB_2_container']/ul/li[%s]/label" % str(i)).click()
+#                except:
+#                    wd.find_element_by_xpath("//div[@id='mCSB_1_container']/ul/li[%s]/label" % str(i)).click()
+#            elif ct == 3:
+#                wd.find_element_by_xpath("//div[@id='mCSB_3_container']/ul/li[%s]/label" % str(i)).click()
+#            elif ct == 4:
+#                wd.find_element_by_xpath("//div[@id='mCSB_4_container']/ul/li[%s]/label" % str(i)).click()
+#            elif ct == 5:
+#                wd.find_element_by_xpath("//div[@id='mCSB_5_container']/ul/li[%s]/label" % str(i)).click()
+#            elif ct == 6:
+#                wd.find_element_by_xpath("//div[@id='mCSB_6_container']/ul/li[%s]/label" % str(i)).click()
+#            elif ct == 7:
+#                    wd.find_element_by_xpath("//div[@id='mCSB_7_container']/ul/li[%s]/label" % str(i)).click()
+#            elif ct == 8:
+#                    wd.find_element_by_xpath("//div[@id='mCSB_8_container']/ul/li[%s]/label" % str(i)).click()
+#            elif ct == 9:
+#                    wd.find_element_by_xpath("//div[@id='mCSB_9_container']/ul/li[%s]/label" % str(i)).click()
+#            elif ct == 10:
+#                    wd.find_element_by_xpath("//div[@id='mCSB_10_container']/ul/li[%s]/label" % str(i)).click()
+#        else:
+#            i = 2
+#            wd.find_element_by_xpath("//div[@id='mCSB_2_container']/ul/li[%s]/label" % str(i)).click()
+#        self.press_search_button()
+#        return i, ct
 
     def press_search_button(self):
         wd = self.app.wd
         wd.find_element_by_xpath("//form[@id='frmSearch']//button[.='Поиск']").click()
 
-    def is_sm_advSearch_is_displayed(self):
-        try:
-            text = self.app.wd.find_element_by_id("advSearchContent").value_of_css_property("display")
-            if text == 'block':
-             return True
-        except:
-            return False
+#    def is_sm_advSearch_is_displayed(self):
+#        try:
+#            text = self.app.wd.find_element_by_id("advSearchContent").value_of_css_property("display")
+#            if text == 'block':
+#             return True
+#        except:
+#            return False
 
-    def find_zakazchik_for_purchases_list(self):
-        wd = self.app.wd
-        self.app.wait_smBlock(600)
-        i = randrange(24)
-        wd.find_element_by_xpath(
-            "//div[@id='aggregatesPlaceholder']/table/tbody/tr[1]/td[3]/div[2]/div/div[1]/span[2]").click()
-        self.app.wait_sm_artefact_Block(10)
-        wd.find_element_by_id("aggSearchText").click()
-        wd.find_element_by_id("aggSearchText").clear()
-        wd.find_element_by_id("aggSearchText").send_keys("администрация")
-        wd.find_element_by_id("aggSearch").click()
-        self.app.wait_sm_artefact_Block(10)
-        if i > 0:
-            wd.find_element_by_xpath("//div[@id='mCSB_12_container']/div/ul/li[%s]/label" % i).click()
-        else:
-            i = 2
-            wd.find_element_by_xpath("//div[@id='mCSB_12_container']/div/ul/li[%s]/label" % i).click()
-        wd.find_element_by_xpath("//div[@id='mainAggDlgContent']//button[.='Применить фильтр']").click()
-        self.app.wait_smBlock(600)
-        self.press_search_button()
+#    def find_zakazchik_for_purchases_list(self):
+#        wd = self.app.wd
+#        self.app.wait_smBlock(600)
+#        i = randrange(24)
+#        wd.find_element_by_xpath(
+#            "//div[@id='aggregatesPlaceholder']/table/tbody/tr[1]/td[3]/div[2]/div/div[1]/span[2]").click()
+#        self.app.wait_sm_artefact_Block(10)
+#        wd.find_element_by_id("aggSearchText").click()
+#        wd.find_element_by_id("aggSearchText").clear()
+#        wd.find_element_by_id("aggSearchText").send_keys("администрация")
+#        wd.find_element_by_id("aggSearch").click()
+#        self.app.wait_sm_artefact_Block(10)
+#        if i > 0:
+#            wd.find_element_by_xpath("//div[@id='mCSB_12_container']/div/ul/li[%s]/label" % i).click()
+#        else:
+#            i = 2
+#            wd.find_element_by_xpath("//div[@id='mCSB_12_container']/div/ul/li[%s]/label" % i).click()
+#        wd.find_element_by_xpath("//div[@id='mainAggDlgContent']//button[.='Применить фильтр']").click()
+#        self.app.wait_smBlock(600)
+#        self.press_search_button()
 
 
 # ! not work
-    def search_in_opened_container(self):
-        wd = self.app.wd
-        self.app.wait_smBlock(600)
-        if not self.is_sm_advSearch_is_displayed():
-            if len(wd.find_elements_by_xpath("//div[@class='block-label']//a[.='Показать/скрыть']")) < 2:
-                wd.find_element_by_xpath("//div[@class='block-label']//a[.='Показать/скрыть']").click()
-            else:
-                wd.find_element_by_xpath("//div[@id='advSearch']/div[2]/a").click()
-        i = randrange(1, 24, 1)
-        c = len(wd.find_elements_by_css_selector("span.agg-widget_btn"))
-        ct = randrange(c)
-        wd.find_elements_by_css_selector("span.agg-widget_btn")[ct].click()
-        self.app.wait_sm_artefact_Block(10)
-        #найти как кликнуть на элементе
+#    def search_in_opened_container(self):
+#        wd = self.app.wd
+#        self.app.wait_smBlock(600)
+#        if not self.is_sm_advSearch_is_displayed():
+#            if len(wd.find_elements_by_xpath("//div[@class='block-label']//a[.='Показать/скрыть']")) < 2:
+#                wd.find_element_by_xpath("//div[@class='block-label']//a[.='Показать/скрыть']").click()
+#            else:
+#                wd.find_element_by_xpath("//div[@id='advSearch']/div[2]/a").click()
+#        i = randrange(1, 24, 1)
+#        c = len(wd.find_elements_by_css_selector("span.agg-widget_btn"))
+#        ct = randrange(c)
+#        wd.find_elements_by_css_selector("span.agg-widget_btn")[ct].click()
+#        self.app.wait_sm_artefact_Block(10)
+#        #найти как кликнуть на элементе
 
-        wd.find_element_by_xpath("//div[@id='mainAggDlgContent']//button[.='Применить фильтр']").click()
-        self.app.wait_smBlock(600)
-        self.press_search_button()
-
-
+#        wd.find_element_by_xpath("//div[@id='mainAggDlgContent']//button[.='Применить фильтр']").click()
+#        self.app.wait_smBlock(600)
+#        self.press_search_button()
 
 
-    def get_artef_parametrs(self, ct):
-        wd = self.app.wd
-        self.app.wait_smBlock(600)
-        for row in wd.find_elements_by_xpath("//div[@id='mCSB_%s_container']/ul/li[1]" % ct):
-
-            cells = row.find_elements_by_tag_name("span")
-            results = cells[0].find_element_by_tag_name("em").text
-            try:
-                parametr = cells[3].text
-            except:
-                parametr = cells[2].text
-            return parametr
 
 
-    def get_artef_param(self, ct):
-        wd = self.app.wd
-        param = self.get_artef_parametrs(ct)
-        return param
+#    def get_artef_parametrs(self, ct):
+#        wd = self.app.wd
+#        self.app.wait_smBlock(600)
+#        for row in wd.find_elements_by_xpath("//div[@id='mCSB_%s_container']/ul/li[1]" % ct):
 
-    def is_smresult_not_0(self):
-        try:
-            text = self.get_total_results()
-            if text != '0':
-             return True
-        except:
-            return False
-
-    def check_results(self):
-        self.app.wait_smBlock(900)
-        if self.is_smresult_not_0():
-            result = self.get_total_results()
-            return result
-        else:
-            return '0'
+#            cells = row.find_elements_by_tag_name("span")
+#            results = cells[0].find_element_by_tag_name("em").text
+#            try:
+#                parametr = cells[3].text
+#            except:
+#                parametr = cells[2].text
+#            return parametr
 
 
-    def get_total_results(self):
-        wd = self.app.wd
-        results = wd.find_element_by_xpath("//div[@class='panel_header']/h2").get_attribute("textContent")
-        #clear_result = wd.find_element_by_xpath("//div[@class='panel_header']/h2").get_attribute("textContent")[13:len(results)]
-        clear_result = results[13:len(results)]
-        return self.clear_result(clear_result)
+#    def get_artef_param(self, ct):
+#        wd = self.app.wd
+#        param = self.get_artef_parametrs(ct)
+#        return param
+
+#    def is_smresult_not_0(self):
+#        try:
+#            text = self.get_total_results()
+#            if text != '0':
+#             return True
+#        except:
+#            return False
+
+#    def check_results(self):
+#        self.app.wait_smBlock(900)
+#        if self.is_smresult_not_0():
+#            result = self.get_total_results()
+#            return result
+#        else:
+#            return '0'
+
+
+#    def get_total_results(self):
+#        wd = self.app.wd
+#        results = wd.find_element_by_xpath("//div[@class='panel_header']/h2").get_attribute("textContent")
+#        #clear_result = wd.find_element_by_xpath("//div[@class='panel_header']/h2").get_attribute("textContent")[13:len(results)]
+#        clear_result = results[13:len(results)]
+#        return self.clear_result(clear_result)
 
 
     def create_contact_report_all_in_dif_row_tel_mail(self):
@@ -319,13 +319,13 @@ class testHelperSM:
         if not wd.find_element_by_id("allItemsCb").is_selected():
             wd.find_element_by_id("allItemsCb").click()
 
-    def clear_result(self, s):
-        x = re.sub(" ", "", str(s))
-        return x
+#    def clear_result(self, s):
+#        x = re.sub(" ", "", str(s))
+#        return x
 
-    def clear_spase_result(self, s):
-        x = re.sub(" ", "", str(s))
-        return x
+#    def clear_spase_result(self, s):
+#        x = re.sub(" ", "", str(s))
+#        return x
 
 
 

@@ -158,6 +158,11 @@ class SessionHelper:
         wd.get(baseAdminUrlMarker + page)
         self.app.wait_smBlock(5)
 
+    def open_href_page(self, page):
+        wd = self.app.wd
+        wd.get(page)
+        self.app.wait_smBlock(5)
+
     def is_marker(self):
         try:
             self.app.wd.current_url.startswith(self.app.baseUrlSM)

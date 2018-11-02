@@ -13,16 +13,18 @@ def test_sm_create_report_rnpSuppliers(app):
     app.session.ensure_login_sm(app.username, app.password)
     app.session.ensure_login_sm(app.username, app.password)
     app.session.open_SM_page(app.smPurchases)
-    app.testhelpersm.find_in_container_number(11, 0)
-    if app.testhelpersm.check_results() == '0':
+    # Искать в контейнере (всего контейнеров + 1, номер контейнера(если 0 - случайный выбор), номер строки
+    # в контейнере если 0 - случайный выбор)
+    app.testHelperSMSearch.find_in_container_number(11, 0, 0)
+    if app.testHelperSMSearch.check_results() == '0':
         tr = 1
-        while app.testhelpersm.check_results() == '0' and tr < 20:
+        while app.testHelperSMSearch.check_results() == '0' and tr < 20:
             app.session.open_SM_page(app.smPurchases)
-            app.testhelpersm.find_in_container_number(11, 0)
+            app.testHelperSMSearch.find_in_container_number(11, 0, 0)
             tr = tr + 1
     cd2 = app.current_date_time().strftime('%d.%m.%Y %H:%M')
     app.testhelpersm.create_contact_list_10000(cd2, text)
-    #app.testhelpersm.create_purchases_list_50(cd2, text)
+    #app.testhelpersm.create_purchases_company_list_50(cd2, text)
     app.banner_link_button(30, i1)
     assert (app.testhelpersm.contact_or_purchases_list_is_present(cd2, text) == True)
     app.testhelpersm.open_first_contact_list()
@@ -47,16 +49,18 @@ def test_sm_create_report_RnpParticipantsSettings(app):
     app.session.ensure_login_sm(app.username, app.password)
     app.session.ensure_login_sm(app.username, app.password)
     app.session.open_SM_page(app.smPurchases)
-    app.testhelpersm.find_in_container_number(11, 0)
-    if app.testhelpersm.check_results() == '0':
+    # Искать в контейнере (всего контейнеров + 1, номер контейнера(если 0 - случайный выбор), номер строки
+    # в контейнере если 0 - случайный выбор)
+    app.testHelperSMSearch.find_in_container_number(11, 0, 0)
+    if app.testHelperSMSearch.check_results() == '0':
         tr = 1
-        while app.testhelpersm.check_results() == '0' and tr < 20:
+        while app.testHelperSMSearch.check_results() == '0' and tr < 20:
             app.session.open_SM_page(app.smPurchases)
-            app.testhelpersm.find_in_container_number(11, 0)
+            app.testHelperSMSearch.find_in_container_number(11, 0, 0)
             tr = tr + 1
     cd2 = app.current_date_time().strftime('%d.%m.%Y %H:%M')
     app.testhelpersm.create_contact_list_10000(cd2, text)
-    #app.testhelpersm.create_purchases_list_50(cd2, text)
+    #app.testhelpersm.create_purchases_company_list_50(cd2, text)
     app.banner_link_button(30, i1)
     assert (app.testhelpersm.contact_or_purchases_list_is_present(cd2, text) == True)
     app.testhelpersm.open_first_contact_list()
@@ -81,16 +85,18 @@ def test_sm_create_report_FasComplaintsSettings(app):
     app.session.ensure_login_sm(app.username, app.password)
     app.session.ensure_login_sm(app.username, app.password)
     app.session.open_SM_page(app.smPurchases)
-    app.testhelpersm.find_in_container_number(11, 0)
-    if app.testhelpersm.check_results() == '0':
+    # Искать в контейнере (всего контейнеров + 1, номер контейнера(если 0 - случайный выбор), номер строки
+    # в контейнере если 0 - случайный выбор)
+    app.testHelperSMSearch.find_in_container_number(11, 0, 0)
+    if app.testHelperSMSearch.check_results() == '0':
         tr = 1
-        while app.testhelpersm.check_results() == '0' and tr < 20:
+        while app.testHelperSMSearch.check_results() == '0' and tr < 20:
             app.session.open_SM_page(app.smPurchases)
-            app.testhelpersm.find_in_container_number(11, 0)
+            app.testHelperSMSearch.find_in_container_number(11, 0, 0)
             tr = tr + 1
     cd2 = app.current_date_time().strftime('%d.%m.%Y %H:%M')
     app.testhelpersm.create_contact_list_10000(cd2, text)
-    #app.testhelpersm.create_purchases_list_50(cd2, text)
+    #app.testhelpersm.create_purchases_company_list_50(cd2, text)
     app.banner_link_button(30, i1)
     assert (app.testhelpersm.contact_or_purchases_list_is_present(cd2, text) == True)
     app.testhelpersm.open_first_contact_list()
@@ -115,16 +121,18 @@ def test_sm_create_report_contacts_from_purchases_list_all_in_one_row(app):
     app.session.ensure_login_sm(app.username, app.password)
     app.session.ensure_login_sm(app.username, app.password)
     app.session.open_SM_page(app.smPurchases)
-    app.testhelpersm.find_in_container_number(11, 0)
-    if app.testhelpersm.check_results() == '0':
+    # Искать в контейнере (всего контейнеров + 1, номер контейнера(если 0 - случайный выбор), номер строки
+    # в контейнере если 0 - случайный выбор)
+    app.testHelperSMSearch.find_in_container_number(11, 0, 0)
+    if app.testHelperSMSearch.check_results() == '0':
         tr = 1
-        while app.testhelpersm.check_results() == '0' and tr < 20:
+        while app.testHelperSMSearch.check_results() == '0' and tr < 20:
             app.session.open_SM_page(app.smPurchases)
-            app.testhelpersm.find_in_container_number(11, 0)
+            app.testHelperSMSearch.find_in_container_number(11, 0, 0)
             tr = tr + 1
     cd2 = app.current_date_time().strftime('%d.%m.%Y %H:%M')
     app.testhelpersm.create_contact_list_10000(cd2, text)
-    #app.testhelpersm.create_purchases_list_50(cd2, text)
+    #app.testhelpersm.create_purchases_company_list_50(cd2, text)
     app.banner_link_button(30, i1)
     assert (app.testhelpersm.contact_or_purchases_list_is_present(cd2, text) == True)
     app.testhelpersm.open_first_contact_list()
@@ -149,16 +157,18 @@ def test_sm_create_report_contacts_from_purchases_list_all_in_dif_row(app):
     app.session.ensure_login_sm(app.username, app.password)
     app.session.ensure_login_sm(app.username, app.password)
     app.session.open_SM_page(app.smPurchases)
-    app.testhelpersm.find_in_container_number(11, 0)
-    if app.testhelpersm.check_results() == '0':
+    # Искать в контейнере (всего контейнеров + 1, номер контейнера(если 0 - случайный выбор), номер строки
+    # в контейнере если 0 - случайный выбор)
+    app.testHelperSMSearch.find_in_container_number(11, 0, 0)
+    if app.testHelperSMSearch.check_results() == '0':
         tr = 1
-        while app.testhelpersm.check_results() == '0' and tr < 20:
+        while app.testHelperSMSearch.check_results() == '0' and tr < 20:
             app.session.open_SM_page(app.smPurchases)
-            app.testhelpersm.find_in_container_number(11, 0)
+            app.testHelperSMSearch.find_in_container_number(11, 0, 0)
             tr = tr + 1
     cd2 = app.current_date_time().strftime('%d.%m.%Y %H:%M')
     app.testhelpersm.create_contact_list_10000(cd2, text)
-    #app.testhelpersm.create_purchases_list_50(cd2, text)
+    #app.testhelpersm.create_purchases_company_list_50(cd2, text)
     app.banner_link_button(30, i1)
     assert (app.testhelpersm.contact_or_purchases_list_is_present(cd2, text) == True)
     app.testhelpersm.open_first_contact_list()
@@ -183,16 +193,18 @@ def test_sm_create_report_prices_zakazchik(app):
     app.session.ensure_login_sm(app.username, app.password)
     app.session.ensure_login_sm(app.username, app.password)
     app.session.open_SM_page(app.smPurchases)
-    app.testhelpersm.find_in_container_number(11, 0)
-    if app.testhelpersm.check_results() == '0':
+    # Искать в контейнере (всего контейнеров + 1, номер контейнера(если 0 - случайный выбор), номер строки
+    # в контейнере если 0 - случайный выбор)
+    app.testHelperSMSearch.find_in_container_number(11, 0, 0)
+    if app.testHelperSMSearch.check_results() == '0':
         tr = 1
-        while app.testhelpersm.check_results() == '0' and tr < 20:
+        while app.testHelperSMSearch.check_results() == '0' and tr < 20:
             app.session.open_SM_page(app.smPurchases)
-            app.testhelpersm.find_in_container_number(11, 0)
+            app.testHelperSMSearch.find_in_container_number(11, 0, 0)
             tr = tr + 1
     cd2 = app.current_date_time().strftime('%d.%m.%Y %H:%M')
     app.testhelpersm.create_contact_list_10000(cd2, text)
-    #app.testhelpersm.create_purchases_list_50(cd2, text)
+    #app.testhelpersm.create_purchases_company_list_50(cd2, text)
     app.banner_link_button(30, i1)
     assert (app.testhelpersm.contact_or_purchases_list_is_present(cd2, text) == True)
     app.testhelpersm.open_first_contact_list()
@@ -217,16 +229,18 @@ def test_sm_create_report_prices_postavschik(app):
     app.session.ensure_login_sm(app.username, app.password)
     app.session.ensure_login_sm(app.username, app.password)
     app.session.open_SM_page(app.smPurchases)
-    app.testhelpersm.find_in_container_number(11, 0)
-    if app.testhelpersm.check_results() == '0':
+    # Искать в контейнере (всего контейнеров + 1, номер контейнера(если 0 - случайный выбор), номер строки
+    # в контейнере если 0 - случайный выбор)
+    app.testHelperSMSearch.find_in_container_number(11, 0, 0)
+    if app.testHelperSMSearch.check_results() == '0':
         tr = 1
-        while app.testhelpersm.check_results() == '0' and tr < 20:
+        while app.testHelperSMSearch.check_results() == '0' and tr < 20:
             app.session.open_SM_page(app.smPurchases)
-            app.testhelpersm.find_in_container_number(11, 0)
+            app.testHelperSMSearch.find_in_container_number(11, 0, 0)
             tr = tr + 1
     cd2 = app.current_date_time().strftime('%d.%m.%Y %H:%M')
     app.testhelpersm.create_contact_list_10000(cd2, text)
-    #app.testhelpersm.create_purchases_list_50(cd2, text)
+    #app.testhelpersm.create_purchases_company_list_50(cd2, text)
     app.banner_link_button(30, i1)
     assert (app.testhelpersm.contact_or_purchases_list_is_present(cd2, text) == True)
     app.testhelpersm.open_first_contact_list()
@@ -251,16 +265,18 @@ def test_sm_create_report_search_result(app):
     app.session.ensure_login_sm(app.username, app.password)
     app.session.ensure_login_sm(app.username, app.password)
     app.session.open_SM_page(app.smPurchases)
-    app.testhelpersm.find_in_container_number(11, 0)
-    if app.testhelpersm.check_results() == '0':
+    # Искать в контейнере (всего контейнеров + 1, номер контейнера(если 0 - случайный выбор), номер строки
+    # в контейнере если 0 - случайный выбор)
+    app.testHelperSMSearch.find_in_container_number(11, 0, 0)
+    if app.testHelperSMSearch.check_results() == '0':
         tr = 1
-        while app.testhelpersm.check_results() == '0' and tr < 20:
+        while app.testHelperSMSearch.check_results() == '0' and tr < 20:
             app.session.open_SM_page(app.smPurchases)
-            app.testhelpersm.find_in_container_number(11, 0)
+            app.testHelperSMSearch.find_in_container_number(11, 0, 0)
             tr = tr + 1
     cd2 = app.current_date_time().strftime('%d.%m.%Y %H:%M')
     app.testhelpersm.create_contact_list_10000(cd2, text)
-    #app.testhelpersm.create_purchases_list_50(cd2, text)
+    #app.testhelpersm.create_purchases_company_list_50(cd2, text)
     app.banner_link_button(30, i1)
     assert (app.testhelpersm.contact_or_purchases_list_is_present(cd2, text) == True)
     app.testhelpersm.open_first_contact_list()

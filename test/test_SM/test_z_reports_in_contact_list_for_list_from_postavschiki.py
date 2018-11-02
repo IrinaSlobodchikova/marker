@@ -9,16 +9,18 @@ def test_sm_create_report_covladeltsy(app):
     i2 = "Открыть отчеты"
     text = "список компаний %s"
     app.testhelpersm.refresh_page()
-    app.session.open_SM_page(app.smParticipants)
+    app.session.open_SM_page(app.smParticipantsSuppliers)
     app.session.ensure_login_sm(app.username, app.password)
     app.session.ensure_login_sm(app.username, app.password)
-    app.session.open_SM_page(app.smParticipants)
-    app.testhelpersm.find_in_container_number(6, 0)
-    if app.testhelpersm.check_results() == '0':
+    app.session.open_SM_page(app.smParticipantsSuppliers)
+    # Искать в контейнере (всего контейнеров + 1, номер контейнера(если 0 - случайный выбор), номер строки
+    # в контейнере если 0 - случайный выбор)
+    app.testHelperSMSearch.find_in_container_number(4, 0, 0)
+    if app.testHelperSMSearch.check_results() == '0':
         tr = 1
-        while app.testhelpersm.check_results() == '0' and tr < 20:
-            app.session.open_SM_page(app.smParticipants)
-            app.testhelpersm.find_in_container_number(6, 0)
+        while app.testHelperSMSearch.check_results() == '0' and tr < 20:
+            app.session.open_SM_page(app.smParticipantsSuppliers)
+            app.testHelperSMSearch.find_in_container_number(4, 0, 0)
             tr = tr + 1
     cd2 = app.current_date_time().strftime('%d.%m.%Y %H:%M')
     #app.testhelpersm.create_contact_list_10000(cd2, text)
@@ -43,16 +45,18 @@ def test_sm_create_report_affelir(app):
     i2 = "Открыть отчеты"
     text = "список компаний %s"
     app.testhelpersm.refresh_page()
-    app.session.open_SM_page(app.smParticipants)
+    app.session.open_SM_page(app.smParticipantsSuppliers)
     app.session.ensure_login_sm(app.username, app.password)
     app.session.ensure_login_sm(app.username, app.password)
-    app.session.open_SM_page(app.smParticipants)
-    app.testhelpersm.find_in_container_number(6, 0)
-    if app.testhelpersm.check_results() == '0':
+    app.session.open_SM_page(app.smParticipantsSuppliers)
+    # Искать в контейнере (всего контейнеров + 1, номер контейнера(если 0 - случайный выбор), номер строки
+    # в контейнере если 0 - случайный выбор)
+    app.testHelperSMSearch.find_in_container_number(4, 0, 0)
+    if app.testHelperSMSearch.check_results() == '0':
         tr = 1
-        while app.testhelpersm.check_results() == '0' and tr < 20:
-            app.session.open_SM_page(app.smParticipants)
-            app.testhelpersm.find_in_container_number(6, 0)
+        while app.testHelperSMSearch.check_results() == '0' and tr < 20:
+            app.session.open_SM_page(app.smParticipantsSuppliers)
+            app.testHelperSMSearch.find_in_container_number(4, 0, 0)
             tr = tr + 1
     cd2 = app.current_date_time().strftime('%d.%m.%Y %H:%M')
     #app.testhelpersm.create_contact_list_10000(cd2, text)
@@ -77,16 +81,18 @@ def test_sm_create_report_contacts_from_contact_list_all_in_one_row(app):
     i2 = "Открыть отчеты"
     text = "список компаний %s"
     app.testhelpersm.refresh_page()
-    app.session.open_SM_page(app.smParticipants)
+    app.session.open_SM_page(app.smParticipantsSuppliers)
     app.session.ensure_login_sm(app.username, app.password)
     app.session.ensure_login_sm(app.username, app.password)
-    app.session.open_SM_page(app.smParticipants)
-    app.testhelpersm.find_in_container_number(6, 0)
-    if app.testhelpersm.check_results() == '0':
+    app.session.open_SM_page(app.smParticipantsSuppliers)
+    # Искать в контейнере (всего контейнеров + 1, номер контейнера(если 0 - случайный выбор), номер строки
+    # в контейнере если 0 - случайный выбор)
+    app.testHelperSMSearch.find_in_container_number(4, 0, 0)
+    if app.testHelperSMSearch.check_results() == '0':
         tr = 1
-        while app.testhelpersm.check_results() == '0' and tr < 20:
-            app.session.open_SM_page(app.smParticipants)
-            app.testhelpersm.find_in_container_number(6, 0)
+        while app.testHelperSMSearch.check_results() == '0' and tr < 20:
+            app.session.open_SM_page(app.smParticipantsSuppliers)
+            app.testHelperSMSearch.find_in_container_number(4, 0, 0)
             tr = tr + 1
     cd2 = app.current_date_time().strftime('%d.%m.%Y %H:%M')
     #app.testhelpersm.create_contact_list_10000(cd2, text)
@@ -111,16 +117,18 @@ def test_sm_create_report_contacts_from_contact_list_all_in_dif_row(app):
     i2 = "Открыть отчеты"
     text = "список компаний %s"
     app.testhelpersm.refresh_page()
-    app.session.open_SM_page(app.smParticipants)
+    app.session.open_SM_page(app.smParticipantsSuppliers)
     app.session.ensure_login_sm(app.username, app.password)
     app.session.ensure_login_sm(app.username, app.password)
-    app.session.open_SM_page(app.smParticipants)
-    app.testhelpersm.find_in_container_number(6, 0)
-    if app.testhelpersm.check_results() == '0':
+    app.session.open_SM_page(app.smParticipantsSuppliers)
+    # Искать в контейнере (всего контейнеров + 1, номер контейнера(если 0 - случайный выбор), номер строки
+    # в контейнере если 0 - случайный выбор)
+    app.testHelperSMSearch.find_in_container_number(4, 0, 0)
+    if app.testHelperSMSearch.check_results() == '0':
         tr = 1
-        while app.testhelpersm.check_results() == '0' and tr < 20:
-            app.session.open_SM_page(app.smParticipants)
-            app.testhelpersm.find_in_container_number(6, 0)
+        while app.testHelperSMSearch.check_results() == '0' and tr < 20:
+            app.session.open_SM_page(app.smParticipantsSuppliers)
+            app.testHelperSMSearch.find_in_container_number(4, 0, 0)
             tr = tr + 1
     cd2 = app.current_date_time().strftime('%d.%m.%Y %H:%M')
     #app.testhelpersm.create_contact_list_10000(cd2, text)
@@ -145,16 +153,18 @@ def test_sm_create_report_result(app):
     i2 = "Открыть отчеты"
     text = "список компаний %s"
     app.testhelpersm.refresh_page()
-    app.session.open_SM_page(app.smParticipants)
+    app.session.open_SM_page(app.smParticipantsSuppliers)
     app.session.ensure_login_sm(app.username, app.password)
     app.session.ensure_login_sm(app.username, app.password)
-    app.session.open_SM_page(app.smParticipants)
-    app.testhelpersm.find_in_container_number(6, 0)
-    if app.testhelpersm.check_results() == '0':
+    app.session.open_SM_page(app.smParticipantsSuppliers)
+    # Искать в контейнере (всего контейнеров + 1, номер контейнера(если 0 - случайный выбор), номер строки
+    # в контейнере если 0 - случайный выбор)
+    app.testHelperSMSearch.find_in_container_number(4, 0, 0)
+    if app.testHelperSMSearch.check_results() == '0':
         tr = 1
-        while app.testhelpersm.check_results() == '0' and tr < 20:
-            app.session.open_SM_page(app.smParticipants)
-            app.testhelpersm.find_in_container_number(6, 0)
+        while app.testHelperSMSearch.check_results() == '0' and tr < 20:
+            app.session.open_SM_page(app.smParticipantsSuppliers)
+            app.testHelperSMSearch.find_in_container_number(4, 0, 0)
             tr = tr + 1
     cd2 = app.current_date_time().strftime('%d.%m.%Y %H:%M')
     #app.testhelpersm.create_contact_list_10000(cd2, text)
