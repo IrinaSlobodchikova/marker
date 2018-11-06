@@ -16,7 +16,8 @@ def test_sm_link_smPurchases_publication(app):
             app.session.open_SM_page(app.smPurchases)
             app.testHelperSMSearch.find_in_container_number(11, 1, 0)
             tr = tr + 1
-    s = app.testHelperSMSearch.get_table_parametrs(1, 1)
+    #первый параметр (номер строки, если 0 - случайный выбор), второй номер колонки в таблице
+    s = app.testHelperSMSearch.get_one_table_parametr(0, 3)
     app.session.open_href_page(s[4])
     s2 = app.testHelperSMSearch.compare_lot()
     assert s[3] == s2[0] or s[3] == s2[1]
