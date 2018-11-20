@@ -12,7 +12,7 @@ def test_sm_find_company_by_fio_company(app):
     # Искать в контейнере (всего контейнеров + 1, номер контейнера(если 0 - случайный выбор), номер строки
     # в контейнере если 0 - случайный выбор)
     #s = app.testhelpersm.find_in_container_number(6, 0, 0)
-    app.testHelperSMSearch.find_company_by_fio()
+    app.testHelperSMSearch.find_company_by_fio("Иванов")
     app.testHelperSMSearch.press_search_button()
     #if app.testhelpersm.check_results() == '0':
     #    tr = 1
@@ -34,7 +34,7 @@ def test_sm_find_company_by_fio_zakazchiki(app):
     # Искать в контейнере (всего контейнеров + 1, номер контейнера(если 0 - случайный выбор), номер строки
     # в контейнере если 0 - случайный выбор)
     #s = app.testhelpersm.find_in_container_number(6, 0, 0)
-    app.testHelperSMSearch.find_company_by_fio()
+    app.testHelperSMSearch.find_company_by_fio("Иванов")
     app.testHelperSMSearch.press_search_button()
     #if app.testhelpersm.check_results() == '0':
     #    tr = 1
@@ -56,7 +56,7 @@ def test_sm_find_company_by_fio_poctavchiki(app):
     # Искать в контейнере (всего контейнеров + 1, номер контейнера(если 0 - случайный выбор), номер строки
     # в контейнере если 0 - случайный выбор)
     #s = app.testhelpersm.find_in_container_number(6, 0, 0)
-    app.testHelperSMSearch.find_company_by_fio()
+    app.testHelperSMSearch.find_company_by_fio("Иванов")
     app.testHelperSMSearch.press_search_button()
     #if app.testhelpersm.check_results() == '0':
     #    tr = 1

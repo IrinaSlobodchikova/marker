@@ -67,12 +67,13 @@ def test_sm_link_smAdminAccessManager(app):
     app.session.open_SM_page(app.smAdminAccessManager)
     assert (app.testhelpersm.ensure_link_work() == exp_result)
 
-def test_sm_link_smAdminInstructions(app):
-    exp_result = "Редактирование инструкций"
-    app.session.open_SM_page(app.smAdminInstructions)
-    app.session.ensure_login_sm(app.username, app.password)
-    app.session.open_SM_page(app.smAdminInstructions)
-    assert (app.testhelpersm.ensure_link_work() == exp_result)
+#страница удалена из админки см
+#def test_sm_link_smAdminInstructions(app):
+#    exp_result = "Редактирование инструкций"
+#    app.session.open_SM_page(app.smAdminInstructions)
+#    app.session.ensure_login_sm(app.username, app.password)
+#    app.session.open_SM_page(app.smAdminInstructions)
+#    assert (app.testhelpersm.ensure_link_work() == exp_result)
 
 def test_sm_link_smAdminNotifications(app):
     exp_result = "Редактирование уведомлений"

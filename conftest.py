@@ -90,7 +90,7 @@ def app(request, config):
 @pytest.fixture(scope="session", autouse=True)
 def stop(request):
     def fin():
-        if not fixture.session.is_marker:
+        if fixture.session.is_marker:
             fixture.session.ensure_Marker_logout()
         else:
             fixture.session.ensure_logout_sm()
@@ -106,8 +106,8 @@ def stop(request):
 
 
 def pytest_addoption(parser):
-    parser.addoption("--browser", action="store", default="firefox")
+    parser.addoption("--browser", action="store", default="chrome")
     parser.addoption("--target", action="store", default="target.json")
-    parser.addoption("--environment", action="store", default="test")
+    parser.addoption("--environment", action="store", default="prod")
     #parser.addoption("--check_report_result", action="store", default="True")
     #parser.addoption("--check_ui", action="store_true")

@@ -1,6 +1,7 @@
 import re
-#import datetime
+from datetime import datetime
 from random import randrange
+import calendar
 import time
 from fixture.testhelpersm import testHelperSM
 
@@ -10,6 +11,9 @@ class testHelperSMSearch:
     def __init__(self, app):
         self.app = app
 
+    def current_date_time_day(self):
+        i = datetime.strftime(datetime.now(), "%d")
+        return i
 
     def find_region(self):
         wd = self.app.wd
@@ -32,6 +36,22 @@ class testHelperSMSearch:
         wd.find_element_by_xpath("//div[@id='mainAggDlgContent']//button[.='Применить фильтр']").click()
         self.app.wait_smBlock(600)
         self.press_search_button()
+
+    def find_torgovaya_ploschadka(self, name):
+        wd = self.app.wd
+        self.app.wait_smBlock(600)
+        wd.find_element_by_xpath("//div[@id='additionalAggregatesPlaceholder']/table/tbody/tr/td[3]/div[2]/div/div[1]/span[2]").click()
+        self.app.wait_sm_artefact_Block(10)
+        wd.find_element_by_id("aggSearchText").click()
+        wd.find_element_by_id("aggSearchText").clear()
+        wd.find_element_by_id("aggSearchText").send_keys("%s" % name)
+        wd.find_element_by_id("aggSearch").click()
+        self.app.wait_sm_artefact_Block(10)
+        if name == "ЕЭТП":
+            wd.find_element_by_xpath("//div[@id='mCSB_12_container']/div/ul/li[2]/label").click()
+        else:
+            wd.find_element_by_css_selector("label.checkbox-lbl").click()
+        wd.find_element_by_xpath("//div[@id='mainAggDlgContent']//button[.='Применить фильтр']").click()
 
 
     def find_region3(self):
@@ -81,9 +101,9 @@ class testHelperSMSearch:
             elif ct == 4:
                 wd.find_element_by_xpath("//div[@id='mCSB_4_container']/ul/li[%s]/label" % str(i)).click()
             elif ct == 5:
-                wd.find_element_by_xpath("//div[@id='mCSB_5_container']/ul/li[%s]/label" % str(i)).click()
+                    wd.find_element_by_xpath("//div[@id='mCSB_5_container']/ul/li[%s]/label" % str(i)).click()
             elif ct == 6:
-                wd.find_element_by_xpath("//div[@id='mCSB_6_container']/ul/li[%s]/label" % str(i)).click()
+                    wd.find_element_by_xpath("//div[@id='mCSB_6_container']/ul/li[%s]/label" % str(i)).click()
             elif ct == 7:
                     wd.find_element_by_xpath("//div[@id='mCSB_7_container']/ul/li[%s]/label" % str(i)).click()
             elif ct == 8:
@@ -95,8 +115,38 @@ class testHelperSMSearch:
         else:
             i = 2
             wd.find_element_by_xpath("//div[@id='mCSB_2_container']/ul/li[%s]/label" % str(i)).click()
-        self.press_search_button()
         return i, ct
+
+    def press_bottom_row(self, range_container_numbers, container_number, i):
+        wd = self.app.wd
+        self.app.wait_smBlock(600)
+        #wd.find_element_by_xpath("//div[@id='mCSB_6_scrollbar_vertical']/a[2]").click()
+        self.expand_show_hide()
+        ct = container_number
+        if i > 0 and ct > 0 and ct < range_container_numbers:
+            wd.find_element_by_xpath("//div[@id='mCSB_%s_scrollbar_vertical']/a[2]" % str(ct)).click()
+            time.sleep(4)
+
+    def check_615_can_be_selected(self, range_container_numbers, container_number, row_number):
+        tr = 1
+        if not self.is_615_visible(row_number):
+            while not self.is_615_visible(row_number) and tr < 20:
+                self.press_bottom_row(range_container_numbers, container_number, row_number)
+                tr = tr + 1
+        return True
+
+    def is_615_visible(self, i):
+        self.app.wait_smBlock(600)
+        wd = self.app.wd
+        try:
+            wd.find_element_by_xpath("//div[@id='mCSB_6_container']/ul/li[%s]/label" % str(i)).click()
+            wd.find_element_by_xpath("//div[@id='mCSB_6_container']/ul/li[%s]/label" % str(i)).click()
+            return True
+        except:
+            return False
+
+
+
 
     def expand_show_hide(self):
         wd = self.app.wd
@@ -106,8 +156,10 @@ class testHelperSMSearch:
             else:
                 wd.find_element_by_xpath("//div[@id='advSearch']/div[2]/a").click()
 
+
     def press_search_button(self):
         wd = self.app.wd
+        self.app.wait_smBlock(600)
         wd.find_element_by_xpath("//form[@id='frmSearch']//button[.='Поиск']").click()
 
     def is_sm_advSearch_is_displayed(self):
@@ -222,6 +274,7 @@ class testHelperSMSearch:
             return cell1_price, cell1_text, cell1_href, cell2_text, cell2_href, cell3_text, cell3_href, cell4_price, \
                    cell4_text, cell4_href, cell5_text, cell5_href, cell6_text, cell6_href, cell7_text, cell7_href
 
+    #первый параметр (номер строки, если 0 - случайный выбор), второй номер колонки в таблице
     def get_one_table_parametr(self, i, s):
         wd = self.app.wd
         self.app.wait_smBlock(600)
@@ -334,6 +387,7 @@ class testHelperSMSearch:
         short_name_text = wd.find_element_by_xpath("//div[@id='main']/div[1]/table/tbody/tr[2]/td[2]").text.rstrip()
         return current_text_in_header, short_name_text
 
+# доделать
     def compare_lot(self):
         wd = self.app.wd
         self.app.wait_smBlock(600)
@@ -351,10 +405,182 @@ class testHelperSMSearch:
         seller_price = seller_price2[4:len(seller_price2)]
         return current_text_in_header, short_name_text, period, price, customer, customer_price, seller, seller_price
 
-    def find_company_by_fio(self):
+    def find_company_by_fio(self, s):
         wd = self.app.wd
         self.app.wait_smBlock(600)
-        wd.find_element_by_id("SearchParams.PersonsSearchParams.FioTextSearch").send_keys("Иванов")
+        wd.find_element_by_id("SearchParams.PersonsSearchParams.FioTextSearch").send_keys(s)
 
+    def find_company_by_email(self, s):
+        wd = self.app.wd
+        self.app.wait_smBlock(600)
+        wd.find_element_by_id("SearchParams.PersonsSearchParams.WebTextSearch").send_keys(s)
+
+    def find_company_by_phone(self, s):
+        wd = self.app.wd
+        self.app.wait_smBlock(600)
+        wd.find_element_by_id("SearchParams.PersonsSearchParams.PhoneTextSearch").send_keys(s)
+
+    def find_company_by_name(self, s):
+        wd = self.app.wd
+        self.app.wait_smBlock(600)
+        wd.find_element_by_id("SearchParams.PersonsSearchParams.TextSearch").send_keys(s)
+
+    def enter_text_in_seach_field(self, s):
+        wd = self.app.wd
+        self.app.wait_smBlock(600)
+        wd.find_element_by_id("SearchParams.TextSearch").click()
+        wd.find_element_by_id("SearchParams.TextSearch").clear()
+        wd.find_element_by_id("SearchParams.TextSearch").send_keys(s)
+
+    def select_data_nachala(self, i, t):
+        wd = self.app.wd
+        self.app.wait_smBlock(600)
+        wd.find_element_by_css_selector("i.fa.fa-chevron-down").click()
+        wd.find_element_by_xpath("//form[@id='frmSearch']//label[.='%s']" % i).click()
+        if i == 'Выбрать период...':
+            #вчера сегодня
+            if t == 0:
+                date = self.current_date_time_day()
+                start_date = int(date)-1
+                end_date = date
+                wd.find_element_by_id("SearchParams_ActivationDateFrom").click()
+                wd.find_element_by_link_text("%s" % str(start_date)).click()
+                wd.find_element_by_id("SearchParams_ActivationDateTo").click()
+                wd.find_element_by_link_text("%s" % end_date).click()
+            #произвольный период
+            elif t == 1:
+                date = self.current_date_time_day()
+                start_date = randrange(1, int(date))
+                end_date = randrange(int(date), 28)
+                wd.find_element_by_id("SearchParams_ActivationDateFrom").click()
+                wd.find_element_by_link_text("%s" % start_date).click()
+                wd.find_element_by_id("SearchParams_ActivationDateTo").click()
+                wd.find_element_by_link_text("%s" % end_date).click()
+
+    def select_data_okonchaniya(self, i):
+        wd = self.app.wd
+        self.app.wait_smBlock(600)
+        wd.find_element_by_xpath("//form[@id='frmSearch']/div/div[4]/div[1]/div[4]/div[2]/div/p/label/i").click()
+        if i == 'Выбрать период...':
+            start_date = randrange(1, 15)
+            end_date = randrange(15, 28)
+            wd.find_element_by_xpath(
+                "//form[@id='frmSearch']/div/div[4]/div[1]/div[4]/div[2]/div/div/ul/li[8]/label").click()
+            wd.find_element_by_id("SearchParams_ExpirationDateFrom").click()
+            wd.find_element_by_link_text("%s" % start_date).click()
+            wd.find_element_by_id("SearchParams_ExpirationDateTo").click()
+            wd.find_element_by_link_text("%s" % end_date).click()
+        elif i == 'Сегодня':
+            wd.find_element_by_xpath(
+                "//form[@id='frmSearch']/div/div[4]/div[1]/div[4]/div[2]/div/div/ul/li[2]/label").click()
+        elif i == 'За весь период':
+            wd.find_element_by_xpath(
+                "//form[@id='frmSearch']/div/div[4]/div[1]/div[4]/div[2]/div/div/ul/li[1]/label").click()
+        else:
+            wd.find_element_by_xpath("//form[@id='frmSearch']//label[.='%s']" % i).click()
+
+
+    def select_first_publish_date(self, i, t):
+        wd = self.app.wd
+        self.app.wait_smBlock(600)
+        #l = (
+        #    1 = 'За весь период', 2 = 'Сегодня', 3 = 'Вчера', 4 = 'Последние 7 дней', 5 = 'Текущий месяц',
+        # 6 = 'Прошлый месяц', 7 = 'Текущий квартал', 8 = 'Прошлый квартал',
+        # 9 = 'Текущий год', 10 = 'Прошлый год', 11 = 'Выбрать период...')
+        wd.find_element_by_xpath("//form[@id='frmSearch']/div/div[4]/div[1]/div[5]/div[2]/div/p/label/i").click()
+        if i == 11:
+            #вчера сегодня
+            if t == 0:
+                date = self.current_date_time_day()
+                start_date = int(date)-1
+                end_date = date
+                wd.find_element_by_xpath(
+                    "//form[@id='frmSearch']/div/div[4]/div[1]/div[5]/div[2]/div/div/ul/li[11]/label").click()
+                wd.find_element_by_id("SearchParams_PublicationDateFrom").click()
+                wd.find_element_by_link_text("%s" % start_date).click()
+                wd.find_element_by_id("SearchParams_PublicationDateTo").click()
+                wd.find_element_by_link_text("%s" % end_date).click()
+            #произвольный период
+            elif t == 1:
+                date = self.current_date_time_day()
+                start_date = randrange(1, int(date))
+                end_date = randrange(int(date), 28)
+                wd.find_element_by_xpath(
+                    "//form[@id='frmSearch']/div/div[4]/div[1]/div[5]/div[2]/div/div/ul/li[11]/label").click()
+                wd.find_element_by_id("SearchParams_PublicationDateFrom").click()
+                wd.find_element_by_link_text("%s" % start_date).click()
+                wd.find_element_by_id("SearchParams_PublicationDateTo").click()
+                wd.find_element_by_link_text("%s" % end_date).click()
+        else:
+            wd.find_element_by_xpath(
+                "//form[@id='frmSearch']/div/div[4]/div[1]/div[5]/div[2]/div/div/ul/li[%s]/label" % i).click()
+
+    def set_calendar_value(self, date):
+        wd = self.app.wd
+        self.app.wait_smBlock(600)
+        wd.find_element_by_xpath(
+            "//form[@id='frmSearch']/div/div[4]/div[1]/div[5]/div[2]/div/div/ul/li[11]/label").click()
+        wd.find_element_by_id("SearchParams_PublicationDateFrom").click()
+        wd.find_element_by_css_selector("span.ui-icon.ui-icon-circle-triangle-w").click()
+        wd.find_element_by_link_text("%s" % date).click()
+        wd.find_element_by_id("SearchParams_PublicationDateTo").click()
+        wd.find_element_by_css_selector("span.ui-icon.ui-icon-circle-triangle-w").click()
+        wd.find_element_by_link_text("%s" % date).click()
+
+
+    def select_actual_only(self):
+        wd = self.app.wd
+        self.app.wait_smBlock(600)
+        wd.find_element_by_xpath("//label[@for='idSearchParams.OnlyActual']").click()
+        if not wd.find_element_by_id("idSearchParams.OnlyActual").is_selected():
+            wd.find_element_by_id("idSearchParams.OnlyActual").click()
+
+    def select_search_in_documents(self):
+        wd = self.app.wd
+        self.app.wait_smBlock(600)
+        wd.find_element_by_xpath("//label[@for='idSearchParams.OnlyActual']").click()
+        if not wd.find_element_by_id("idSearchParams.OnlyActual").is_selected():
+            wd.find_element_by_id("idSearchParams.OnlyActual").click()
+
+    def select_spetstorgi(self, i):
+        wd = self.app.wd
+        self.app.wait_smBlock(600)
+        wd.find_element_by_xpath("//form[@id='frmSearch']/div/div[4]/div[1]/div[8]/div[2]/div/p/label/i").click()
+        if i == 2:
+            wd.find_element_by_xpath("//form[@id='frmSearch']//label[.='Только спецторги']").click()
+        elif i == 1:
+            wd.find_element_by_xpath("//form[@id='frmSearch']//label[.='Не учитывать']").click()
+        elif i == 3:
+            wd.find_element_by_xpath("//form[@id='frmSearch']//label[.='Исключить спецторги']").click()
+        else:
+            print("incorrect number of item in menu, possible value: 1 - Не учитывать, 2 - Только спецторги, "
+                  "3 - Исключить спецторги")
+
+    def random_value(self, start_num, end_num):
+        s = randrange(start_num, end_num)
+        return s
+
+    def get_res_by_ploschadka_for_one_day(self, name_ploschadki, date):
+        wd = self.app.wd
+        self.app.wait_smBlock(600)
+        self.set_calendar_value(date)
+        self.find_torgovaya_ploschadka(name_ploschadki)
+
+    def get_minim_max_avg_value(self, name_ploschadki, day_in_month):
+        wd = self.app.wd
+        self.app.wait_smBlock(600)
+        l = []
+        for i in range(1, int(day_in_month)):
+            self.get_res_by_ploschadka_for_one_day(name_ploschadki, i)
+            self.press_search_button()
+            s = self.app.testhelpersm.check_results()
+            return s
+
+
+
+    def day_in_month(self):
+        i = datetime.strftime(datetime.now(), "%m")
+        calendar.monthrange(2010, i)
+        return i
 
 

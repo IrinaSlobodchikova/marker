@@ -10,11 +10,13 @@ def test_sm_link_smPurchases_publication(app):
     # Искать в контейнере (всего контейнеров + 1, номер контейнера(если 0 - случайный выбор), номер строки
     # в контейнере если 0 - случайный выбор)
     app.testHelperSMSearch.find_in_container_number(11, 2, 3)
+    app.testHelperSMSearch.press_search_button()
     if app.testHelperSMSearch.check_results() == '0':
         tr = 1
         while app.testHelperSMSearch.check_results() == '0' and tr < 20:
             app.session.open_SM_page(app.smPurchases)
             app.testHelperSMSearch.find_in_container_number(11, 1, 0)
+            app.testHelperSMSearch.press_search_button()
             tr = tr + 1
     #первый параметр (номер строки, если 0 - случайный выбор), второй номер колонки в таблице
     s = app.testHelperSMSearch.get_one_table_parametr(0, 3)

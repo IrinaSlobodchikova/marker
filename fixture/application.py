@@ -10,6 +10,7 @@ from fixture.text_to_change import text_to_change
 import datetime
 
 
+
 class Application:
 
     def __init__(self, browser, config, environment, check_report_result, baseUrlMarker, baseUrlSM, username, password,
@@ -79,7 +80,7 @@ class Application:
         self.adminfind_users = adminfind_users
         self.adminfind_publication = adminfind_publication
         self.adminnews = adminnews
-        self.wd.implicitly_wait(5)
+        self.wd.implicitly_wait(10)
 
     def is_valid(self):
         try:
@@ -88,13 +89,31 @@ class Application:
         except:
             return False
 
-
+#Marker
 
     def open_marker_home_page(self):
         wd = self.wd
         wd.get(self.baseUrlMarker)
 
+    def banner_link_button_marker(self, timeout):
+        wd = self.wd
+        wait = WebDriverWait(wd, timeout)  # seconds
+        wait.until(EC.presence_of_element_located((By.XPATH, "//div[@id='cdk-overlay-4']/snack-bar-container/simple-snack-bar")))
+        wd.find_element_by_xpath("//div[@id='cdk-overlay-4']/snack-bar-container/simple-snack-bar").click()
+        wd.find_element_by_xpath("//div[@id='cdk-overlay-4']//button[.='Перейти к отчетам']") .click()
 
+    def wait_page_load1(self, timeout):
+        wd = self.wd
+        wait = WebDriverWait(wd, timeout)  # seconds
+        wait.until(EC.invisibility_of_element((By.CSS_SELECTOR, "div.loader__dot")))
+
+    def wait_page_load2(self, timeout):
+        wd = self.wd
+        wait = WebDriverWait(wd, timeout)  # seconds
+        wait.until(EC.invisibility_of_element((By.CSS_SELECTOR, "div.loader.ng-star-inserted")))
+
+
+#spark_marketing
     def open_sm_home_page(self):
         wd = self.wd
         wd.get(self.baseUrlSM)
@@ -141,6 +160,8 @@ class Application:
     def current_date_time(self):
         i = datetime.datetime.now()
         return i
+
+
 
     def destroy(self):
         self.wd.quit()

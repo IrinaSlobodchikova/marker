@@ -56,6 +56,12 @@ class SessionHelper:
                 self.Marker_logout()
         self.Marker_login(username, password)
 
+    def open_marker_page(self, page):
+        wd = self.app.wd
+        baseUrlMarker = self.app.baseUrlMarker
+        wd.get(baseUrlMarker + page)
+        self.app.wait_page_load2(60)
+
 
     def sm_login(self, username, password):
         wd = self.app.wd
@@ -165,7 +171,7 @@ class SessionHelper:
 
     def is_marker(self):
         try:
-            self.app.wd.current_url.startswith(self.app.baseUrlSM)
+            self.app.wd.current_url.startswith(self.app.baseUrlMarker)
             return True
         except:
             return False

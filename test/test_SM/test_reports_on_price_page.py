@@ -13,11 +13,13 @@ def test_sm_create_price_report_result(app):
     # Искать в контейнере (всего контейнеров + 1, номер контейнера(если 0 - случайный выбор), номер строки
     # в контейнере если 0 - случайный выбор)
     app.testHelperSMSearch.find_in_container_number(5, 0, 0)
+    app.testHelperSMSearch.press_search_button()
     if app.testHelperSMSearch.check_results() == '0':
         tr = 1
         while app.testHelperSMSearch.check_results() == '0' and tr < 20:
             app.session.open_SM_page(app.smPrices)
             app.testHelperSMSearch.find_in_container_number(5, 0, 0)
+            app.testHelperSMSearch.press_search_button()
             tr = tr + 1
     cd2 = app.current_date_time().strftime('%H:%M')
     app.testhelpersm.create_contact_report_result()

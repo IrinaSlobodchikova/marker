@@ -16,11 +16,13 @@ def test_sm_create_report_rnpSuppliers(app):
     # Искать в контейнере (всего контейнеров + 1, номер контейнера(если 0 - случайный выбор), номер строки
     # в контейнере если 0 - случайный выбор)
     app.testHelperSMSearch.find_in_container_number(5, 0, 0)
+    app.testHelperSMSearch.press_search_button()
     if app.testHelperSMSearch.check_results() == '0':
         tr = 1
         while app.testHelperSMSearch.check_results() == '0' and tr < 20:
             app.session.open_SM_page(app.smPrices)
             app.testHelperSMSearch.find_in_container_number(5, 0, 0)
+            app.testHelperSMSearch.press_search_button()
             tr = tr + 1
     cd2 = app.current_date_time().strftime('%d.%m.%Y %H:%M')
     app.testhelpersm.create_contact_list_10000(cd2, text)
@@ -52,11 +54,13 @@ def test_sm_create_report_RnpParticipantsSettings(app):
     # Искать в контейнере (всего контейнеров + 1, номер контейнера(если 0 - случайный выбор), номер строки
     # в контейнере если 0 - случайный выбор)
     app.testHelperSMSearch.find_in_container_number(5, 0, 0)
+    app.testHelperSMSearch.press_search_button()
     if app.testHelperSMSearch.check_results() == '0':
         tr = 1
         while app.testHelperSMSearch.check_results() == '0' and tr < 20:
             app.session.open_SM_page(app.smPrices)
             app.testHelperSMSearch.find_in_container_number(5, 0, 0)
+            app.testHelperSMSearch.press_search_button()
             tr = tr + 1
     cd2 = app.current_date_time().strftime('%d.%m.%Y %H:%M')
     app.testhelpersm.create_contact_list_10000(cd2, text)
@@ -88,11 +92,13 @@ def test_sm_create_report_FasComplaintsSettings(app):
     # Искать в контейнере (всего контейнеров + 1, номер контейнера(если 0 - случайный выбор), номер строки
     # в контейнере если 0 - случайный выбор)
     app.testHelperSMSearch.find_in_container_number(5, 0, 0)
+    app.testHelperSMSearch.press_search_button()
     if app.testHelperSMSearch.check_results() == '0':
         tr = 1
         while app.testHelperSMSearch.check_results() == '0' and tr < 20:
             app.session.open_SM_page(app.smPrices)
             app.testHelperSMSearch.find_in_container_number(5, 0, 0)
+            app.testHelperSMSearch.press_search_button()
             tr = tr + 1
     cd2 = app.current_date_time().strftime('%d.%m.%Y %H:%M')
     app.testhelpersm.create_contact_list_10000(cd2, text)
@@ -124,11 +130,13 @@ def test_sm_create_report_contacts_from_purchases_list_all_in_one_row(app):
     # Искать в контейнере (всего контейнеров + 1, номер контейнера(если 0 - случайный выбор), номер строки
     # в контейнере если 0 - случайный выбор)
     app.testHelperSMSearch.find_in_container_number(5, 0, 0)
+    app.testHelperSMSearch.press_search_button()
     if app.testHelperSMSearch.check_results() == '0':
         tr = 1
         while app.testHelperSMSearch.check_results() == '0' and tr < 20:
             app.session.open_SM_page(app.smPrices)
             app.testHelperSMSearch.find_in_container_number(5, 0, 0)
+            app.testHelperSMSearch.press_search_button()
             tr = tr + 1
     cd2 = app.current_date_time().strftime('%d.%m.%Y %H:%M')
     app.testhelpersm.create_contact_list_10000(cd2, text)
@@ -160,11 +168,13 @@ def test_sm_create_report_contacts_from_purchases_list_all_in_dif_row(app):
     # Искать в контейнере (всего контейнеров + 1, номер контейнера(если 0 - случайный выбор), номер строки
     # в контейнере если 0 - случайный выбор)
     app.testHelperSMSearch.find_in_container_number(5, 0, 0)
+    app.testHelperSMSearch.press_search_button()
     if app.testHelperSMSearch.check_results() == '0':
         tr = 1
         while app.testHelperSMSearch.check_results() == '0' and tr < 20:
             app.session.open_SM_page(app.smPrices)
             app.testHelperSMSearch.find_in_container_number(5, 0, 0)
+            app.testHelperSMSearch.press_search_button()
             tr = tr + 1
     cd2 = app.current_date_time().strftime('%d.%m.%Y %H:%M')
     app.testhelpersm.create_contact_list_10000(cd2, text)
@@ -196,11 +206,13 @@ def test_sm_create_report_prices_zakazchik(app):
     # Искать в контейнере (всего контейнеров + 1, номер контейнера(если 0 - случайный выбор), номер строки
     # в контейнере если 0 - случайный выбор)
     app.testHelperSMSearch.find_in_container_number(5, 0, 0)
+    app.testHelperSMSearch.press_search_button()
     if app.testHelperSMSearch.check_results() == '0':
         tr = 1
         while app.testHelperSMSearch.check_results() == '0' and tr < 20:
             app.session.open_SM_page(app.smPrices)
             app.testHelperSMSearch.find_in_container_number(5, 0, 0)
+            app.testHelperSMSearch.press_search_button()
             tr = tr + 1
     cd2 = app.current_date_time().strftime('%d.%m.%Y %H:%M')
     app.testhelpersm.create_contact_list_10000(cd2, text)
@@ -232,11 +244,13 @@ def test_sm_create_report_prices_postavschik(app):
     # Искать в контейнере (всего контейнеров + 1, номер контейнера(если 0 - случайный выбор), номер строки
     # в контейнере если 0 - случайный выбор)
     app.testHelperSMSearch.find_in_container_number(5, 0, 0)
+    app.testHelperSMSearch.press_search_button()
     if app.testHelperSMSearch.check_results() == '0':
         tr = 1
         while app.testHelperSMSearch.check_results() == '0' and tr < 20:
             app.session.open_SM_page(app.smPrices)
             app.testHelperSMSearch.find_in_container_number(5, 0, 0)
+            app.testHelperSMSearch.press_search_button()
             tr = tr + 1
     cd2 = app.current_date_time().strftime('%d.%m.%Y %H:%M')
     app.testhelpersm.create_contact_list_10000(cd2, text)
@@ -268,11 +282,13 @@ def test_sm_create_report_search_result(app):
     # Искать в контейнере (всего контейнеров + 1, номер контейнера(если 0 - случайный выбор), номер строки
     # в контейнере если 0 - случайный выбор)
     app.testHelperSMSearch.find_in_container_number(5, 0, 0)
+    app.testHelperSMSearch.press_search_button()
     if app.testHelperSMSearch.check_results() == '0':
         tr = 1
         while app.testHelperSMSearch.check_results() == '0' and tr < 20:
             app.session.open_SM_page(app.smPrices)
             app.testHelperSMSearch.find_in_container_number(5, 0, 0)
+            app.testHelperSMSearch.press_search_button()
             tr = tr + 1
     cd2 = app.current_date_time().strftime('%d.%m.%Y %H:%M')
     app.testhelpersm.create_contact_list_10000(cd2, text)
